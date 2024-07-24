@@ -51,7 +51,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	private EgovSndngMailRegistService sndngMailRegistService;
 
 	@Resource(name = "egovLoginConfig")
-	EgovLoginConfig egovLoginConfig;
+	private EgovLoginConfig egovLoginConfig;
 
 	/**
 	 * 

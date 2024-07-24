@@ -54,6 +54,11 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	EgovLoginConfig egovLoginConfig;
 
 	/**
+	 * 
+	 */
+	private static final String Y_STRING = "Y";
+
+	/**
 	 * 2011.08.26 EsntlId를 이용한 로그인을 처리한다
 	 * 
 	 * @param vo LoginVO
@@ -228,7 +233,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		mapParam.put("USER_SE", vo.getUserSe());
 		mapParam.put("id", EgovStringUtil.isNullToString(vo.getId()));// KISA 보안약점 조치 (2018-10-29, 윤창원)
 		// 잠김시
-		if ("Y".equals(mapLockUserInfo.get("lockAt"))) {
+		if (Y_STRING.equals(mapLockUserInfo.get("lockAt"))) {
 			sRtnCode = "L";
 			// 패드워드 인증시
 		} else if (((String) mapLockUserInfo.get("userPw")).equals(enpassword)) {

@@ -84,6 +84,9 @@ public class EgovLoginController {
 	@Resource(name = "egovMessageSource")
 	private EgovMessageSource egovMessageSource;
 
+	/**
+	 * 
+	 */
 	@Resource(name = "egovLoginConfig")
 	private EgovLoginConfig egovLoginConfig;
 

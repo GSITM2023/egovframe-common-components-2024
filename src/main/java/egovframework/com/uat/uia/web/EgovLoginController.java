@@ -132,7 +132,7 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@IncludedInfo(name = "로그인", listUrl = "/uat/uia/egovLoginUsr.do", order = 10, gid = 10)
-	@RequestMapping(value = "/uat/uia/egovLoginUsr.do")
+	@RequestMapping("/uat/uia/egovLoginUsr.do")
 	public String loginUsrView(@ModelAttribute(LOGIN_VO) LoginVO loginVO, final HttpServletRequest request,
 			HttpServletResponse response, final Model model) {
 		if (EgovComponentChecker.hasComponent("mberManageService")) {
@@ -180,7 +180,7 @@ public class EgovLoginController {
 	 * @return result - 로그인결과(세션정보)
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionLogin.do")
+	@RequestMapping("/uat/uia/actionLogin.do")
 	public String actionLogin(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final HttpServletRequest request,
 			final HttpSession session, final Model model) {
 
@@ -235,7 +235,7 @@ public class EgovLoginController {
 	 * @return result - 로그인결과(세션정보)
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionCrtfctLogin.do")
+	@RequestMapping("/uat/uia/actionCrtfctLogin.do")
 	public String actionCrtfctLogin(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 
@@ -298,7 +298,7 @@ public class EgovLoginController {
 	 * @return 로그인 페이지
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionMain.do")
+	@RequestMapping("/uat/uia/actionMain.do")
 	public String actionMain(final HttpServletRequest request, final Model model) {
 
 		// 1. Spring Security 사용자권한 처리
@@ -363,7 +363,7 @@ public class EgovLoginController {
 	 * @return String
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionLogout.do")
+	@RequestMapping("/uat/uia/actionLogout.do")
 	public String actionLogout(final HttpSession session, Model model) {
 
 		/*
@@ -388,7 +388,7 @@ public class EgovLoginController {
 	 * @return 아이디/비밀번호 찾기 페이지
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/egovIdPasswordSearch.do")
+	@RequestMapping("/uat/uia/egovIdPasswordSearch.do")
 	public String idPasswordSearchView(final Model model) {
 
 		// 1. 비밀번호 힌트 공통코드 조회
@@ -406,7 +406,7 @@ public class EgovLoginController {
 	 * @return 인증서안내 페이지
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/egovGpkiIssu.do")
+	@RequestMapping("/uat/uia/egovGpkiIssu.do")
 	public String gpkiIssuView(Model model) {
 		return "egovframework/com/uat/uia/EgovGpkiIssu";
 	}
@@ -418,7 +418,7 @@ public class EgovLoginController {
 	 * @return result - 아이디
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/searchId.do")
+	@RequestMapping("/uat/uia/searchId.do")
 	public String searchId(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final Model model) {
 
 		if (loginVO == null || loginVO.getName() == null || "".equals(loginVO.getName()) && loginVO.getEmail() == null
@@ -447,7 +447,7 @@ public class EgovLoginController {
 	 * @return result - 임시비밀번호전송결과
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/searchPassword.do")
+	@RequestMapping("/uat/uia/searchPassword.do")
 	public String searchPassword(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final Model model) {
 
 		// KISA 보안약점 조치 (2018-10-29, 윤창원)
@@ -480,7 +480,7 @@ public class EgovLoginController {
 	 * @return String
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/getEncodingData.do")
+	@RequestMapping("/uat/uia/getEncodingData.do")
 	public void encodingData() {
 
 //		/*
@@ -500,7 +500,7 @@ public class EgovLoginController {
 	 * @return 인증서 등록 페이지
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/EgovGpkiRegist.do")
+	@RequestMapping("/uat/uia/EgovGpkiRegist.do")
 	public String gpkiRegistView(HttpServletRequest request, HttpServletResponse response, Model model) {
 
 		/** GPKI 인증 부분 */
@@ -537,7 +537,7 @@ public class EgovLoginController {
 	 * @return result - dn값
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionGpkiRegist.do")
+	@RequestMapping("/uat/uia/actionGpkiRegist.do")
 	public String actionGpkiRegist(final HttpServletRequest request, HttpServletResponse response, final Model model) {
 
 		/** GPKI 인증 부분 */
@@ -581,7 +581,7 @@ public class EgovLoginController {
 	 * @return result - String
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/refreshSessionTimeout.do")
+	@RequestMapping("/uat/uia/refreshSessionTimeout.do")
 	public ModelAndView refreshSessionTimeout(@RequestParam Map<String, Object> commandMap) {
 		final ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("jsonView");
@@ -598,7 +598,7 @@ public class EgovLoginController {
 	 * @return result - String
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/noticeExpirePwd.do")
+	@RequestMapping("/uat/uia/noticeExpirePwd.do")
 	public String noticeExpirePwd(@RequestParam Map<String, Object> commandMap, final Model model) {
 
 		// 설정된 비밀번호 유효기간을 가져온다. ex) 180이면 비밀번호 변경후 만료일이 앞으로 180일

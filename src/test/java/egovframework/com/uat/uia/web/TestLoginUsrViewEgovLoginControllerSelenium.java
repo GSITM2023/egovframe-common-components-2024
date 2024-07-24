@@ -12,16 +12,31 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author god
+ *
+ */
 @NoArgsConstructor
 public class TestLoginUsrViewEgovLoginControllerSelenium {
 
+	/**
+	 * 
+	 */
 	private WebDriver driver;
 
+	/**
+	 * 
+	 */
 	@Before
 	public void setup() {
 		driver = new ChromeDriver();
 	}
 
+	/**
+	 * 
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void test() throws InterruptedException {
 		driver.get("http://localhost:8080/egovframework-all-in-one/uat/uia/egovLoginUsr.do");

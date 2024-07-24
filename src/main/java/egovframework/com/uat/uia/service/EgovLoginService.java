@@ -37,7 +37,7 @@ public interface EgovLoginService {
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public LoginVO actionLoginByEsntlId(LoginVO loginVO);
+	LoginVO actionLoginByEsntlId(LoginVO loginVO);
 
 	/**
 	 * 일반 로그인을 처리한다
@@ -78,8 +78,8 @@ public interface EgovLoginService {
 	/**
 	 * 로그인인증제한을 처리한다.
 	 * 
-	 * @param loginVO  LoginVO
-	 * @param Map mapLockUserInfo
+	 * @param loginVO LoginVO
+	 * @param Map     mapLockUserInfo
 	 * @return String
 	 * @exception Exception
 	 */

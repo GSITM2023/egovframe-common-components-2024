@@ -176,20 +176,20 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		}
 
 		// 2. 임시 비밀번호를 생성한다.(영+영+숫+영+영+숫+영+영=8자리)
-		String newpassword = "";
+		final StringBuffer newpassword = new StringBuffer();
 		for (int i = 1; i <= 8; i++) {
 			if (i % 3 == 0) {
 				// 숫자
-				newpassword += EgovNumberUtil.getRandomNum(0, 9);
+				newpassword.append(EgovNumberUtil.getRandomNum(0, 9));
 			} else {
 				// 영자
-				newpassword += EgovStringUtil.getRandomStr('a', 'z');
+				newpassword.append(EgovStringUtil.getRandomStr('a', 'z'));
 			}
 		}
 
 		// 3. 임시 비밀번호를 암호화하여 DB에 저장한다.
 		final LoginVO pwVO = new LoginVO();
-		final String enpassword = EgovFileScrty.encryptPassword(newpassword, loginVO.getId());
+		final String enpassword = EgovFileScrty.encryptPassword(newpassword.toString(), loginVO.getId());
 		pwVO.setId(loginVO.getId());
 		pwVO.setPassword(enpassword);
 		pwVO.setUserSe(loginVO.getUserSe());

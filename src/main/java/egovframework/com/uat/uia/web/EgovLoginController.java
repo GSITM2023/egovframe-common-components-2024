@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -180,7 +181,8 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/uat/uia/actionLogin.do")
-	public String actionLogin(@ModelAttribute(LOGIN_VO) LoginVO loginVO, HttpServletRequest request, ModelMap model) {
+	public String actionLogin(@ModelAttribute(LOGIN_VO) LoginVO loginVO, HttpServletRequest request,
+			HttpSession session, ModelMap model) {
 
 		// 1. 로그인인증제한 활성화시
 		if (egovLoginConfig.isLock()) {
@@ -214,9 +216,9 @@ public class EgovLoginController {
 		if (resultVO.getId() != null && !resultVO.getId().equals("")) {
 
 			// 3-1. 로그인 정보를 세션에 저장
-			request.getSession().setAttribute(LOGIN_VO, resultVO);
+			session.setAttribute(LOGIN_VO, resultVO);
 			// 2019.10.01 로그인 인증세션 추가
-			request.getSession().setAttribute("accessUser", resultVO.getUserSe().concat(resultVO.getId()));
+			session.setAttribute("accessUser", resultVO.getUserSe().concat(resultVO.getId()));
 
 			return "redirect:/uat/uia/actionMain.do";
 
@@ -362,7 +364,7 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/uat/uia/actionLogout.do")
-	public String actionLogout(HttpServletRequest request, ModelMap model) {
+	public String actionLogout(HttpSession session, ModelMap model) {
 
 		/*
 		 * String userIp = EgovClntInfo.getClntIP(request);
@@ -370,10 +372,10 @@ public class EgovLoginController {
 		 * // 1. Security 연동 return "redirect:/j_spring_security_logout";
 		 */
 
-		request.getSession().setAttribute(LOGIN_VO, null);
+		session.setAttribute(LOGIN_VO, null);
 		// 세션모드인경우 Authority 초기화
 		// List<String> authList = (List<String>)EgovUserDetailsHelper.getAuthorities();
-		request.getSession().setAttribute("accessUser", null);
+		session.setAttribute("accessUser", null);
 
 		// return "redirect:/egovDevIndex.jsp";
 		return "redirect:/EgovContent.do";

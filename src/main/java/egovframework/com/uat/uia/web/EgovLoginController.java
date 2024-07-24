@@ -82,10 +82,10 @@ public class EgovLoginController {
 
 	/** EgovMessageSource */
 	@Resource(name = "egovMessageSource")
-	EgovMessageSource egovMessageSource;
+	private EgovMessageSource egovMessageSource;
 
 	@Resource(name = "egovLoginConfig")
-	EgovLoginConfig egovLoginConfig;
+	private EgovLoginConfig egovLoginConfig;
 
 	/** log */
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovLoginController.class);

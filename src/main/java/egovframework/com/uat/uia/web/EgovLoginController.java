@@ -140,7 +140,7 @@ public class EgovLoginController {
 		}
 
 		// 권한체크시 에러 페이지 이동
-		String authError = request.getParameter("auth_error") == null ? ""
+		final String authError = request.getParameter("auth_error") == null ? ""
 				: (String) request.getParameter("auth_error");
 		if (authError != null && "1".equals(authError)) {
 			return "egovframework/com/cmm/error/accessDenied";
@@ -161,10 +161,10 @@ public class EgovLoginController {
 //		 */
 
 		// 2021.05.30, 정진오, 디지털원패스 처리하기 위해 로그인 화면에 인증방식 전달
-		String authType = EgovProperties.getProperty("Globals.Auth").trim();
+		final String authType = EgovProperties.getProperty("Globals.Auth").trim();
 		model.addAttribute("authType", authType);
 
-		String message = request.getParameter(LOGIN_MESSAGE);
+		final String message = request.getParameter(LOGIN_MESSAGE);
 		if (message != null) {
 			model.addAttribute(LOGIN_MESSAGE, message);
 		}
@@ -186,10 +186,10 @@ public class EgovLoginController {
 
 		// 1. 로그인인증제한 활성화시
 		if (egovLoginConfig.isLock()) {
-			Map<?, ?> mapLockUserInfo = loginService.selectLoginIncorrect(loginVO);
+			final Map<?, ?> mapLockUserInfo = loginService.selectLoginIncorrect(loginVO);
 			if (mapLockUserInfo != null) {
 				// 2.1 로그인인증제한 처리
-				String sLoginIncorrectCode = loginService.processLoginIncorrect(loginVO, mapLockUserInfo);
+				final String sLoginIncorrectCode = loginService.processLoginIncorrect(loginVO, mapLockUserInfo);
 				if (!"E".equals(sLoginIncorrectCode)) {
 					if ("L".equals(sLoginIncorrectCode)) {
 						model.addAttribute(LOGIN_MESSAGE, egovMessageSource.getMessageArgs("fail.common.loginIncorrect",
@@ -207,8 +207,8 @@ public class EgovLoginController {
 		}
 
 		// 2. 로그인 처리
-		LoginVO resultVO = loginService.actionLogin(loginVO);
-		String userIp = EgovClntInfo.getClntIP(request);
+		final LoginVO resultVO = loginService.actionLogin(loginVO);
+		final String userIp = EgovClntInfo.getClntIP(request);
 		resultVO.setIp(userIp);
 
 		// 3. 일반 로그인 처리
@@ -240,7 +240,7 @@ public class EgovLoginController {
 			HttpServletResponse response, ModelMap model) {
 
 		// 접속IP
-		String userIp = EgovClntInfo.getClntIP(request);
+		final String userIp = EgovClntInfo.getClntIP(request);
 		loginVO.setIp(userIp);
 		LOGGER.debug("User IP : {}", userIp);
 
@@ -302,12 +302,12 @@ public class EgovLoginController {
 	public String actionMain(HttpServletRequest request, ModelMap model) {
 
 		// 1. Spring Security 사용자권한 처리
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		final Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 		if (!isAuthenticated) {
 			model.addAttribute(LOGIN_MESSAGE, egovMessageSource.getMessage(FAIL_COMMON_LOGIN));
 			return EGOV_LOGIN_USR;
 		}
-		LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+		final LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 
 		if ("".equals(user.getIp())) {
 			user.setIp(EgovClntInfo.getClntIP(request));
@@ -331,7 +331,7 @@ public class EgovLoginController {
 //		 */
 
 		// 3. 메인 페이지 이동
-		String mainPage = Globals.MAIN_PAGE;
+		final String mainPage = Globals.MAIN_PAGE;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Globals.MAIN_PAGE > " + Globals.MAIN_PAGE);
@@ -392,9 +392,9 @@ public class EgovLoginController {
 	public String idPasswordSearchView(ModelMap model) {
 
 		// 1. 비밀번호 힌트 공통코드 조회
-		ComDefaultCodeVO vo = new ComDefaultCodeVO();
+		final ComDefaultCodeVO vo = new ComDefaultCodeVO();
 		vo.setCodeId("COM022");
-		List<CmmnDetailCode> code = cmmUseService.selectCmmCodeDetail(vo);
+		final List<CmmnDetailCode> code = cmmUseService.selectCmmCodeDetail(vo);
 		model.addAttribute("pwhtCdList", code);
 
 		return "egovframework/com/uat/uia/EgovIdPasswordSearch";
@@ -428,7 +428,7 @@ public class EgovLoginController {
 
 		// 1. 아이디 찾기
 		loginVO.setName(loginVO.getName().replaceAll(" ", ""));
-		LoginVO resultVO = loginService.searchId(loginVO);
+		final LoginVO resultVO = loginService.searchId(loginVO);
 
 		if (resultVO != null && resultVO.getId() != null && !"".equals(resultVO.getId())) {
 
@@ -461,7 +461,7 @@ public class EgovLoginController {
 		}
 
 		// 1. 비밀번호 찾기
-		boolean result = loginService.searchPassword(loginVO);
+		final boolean result = loginService.searchPassword(loginVO);
 
 		// 2. 결과 리턴
 		if (result) {
@@ -505,7 +505,7 @@ public class EgovLoginController {
 
 		/** GPKI 인증 부분 */
 		// OS에 따라 (local NT(로컬) / server Unix(서버)) 구분
-		String os = System.getProperty("os.arch");
+		final String os = System.getProperty("os.arch");
 		LOGGER.debug("OS : {}", os);
 
 		// String virusReturn = null;
@@ -542,7 +542,7 @@ public class EgovLoginController {
 
 		/** GPKI 인증 부분 */
 		// OS에 따라 (local NT(로컬) / server Unix(서버)) 구분
-		String os = System.getProperty("os.arch");
+		final String os = System.getProperty("os.arch");
 		LOGGER.debug("OS : {}", os);
 
 		// String virusReturn = null;
@@ -550,7 +550,7 @@ public class EgovLoginController {
 		String dn = "";
 
 		// 브라우저 이름을 받기위한 처리
-		String browser = EgovClntInfo.getClntWebKind(request);
+		final String browser = EgovClntInfo.getClntWebKind(request);
 		model.addAttribute("browser", browser);
 //		/*
 //		 * // -- 여기까지 if (os.equalsIgnoreCase("x86")) { // Local Host TEST 진행중 } else {
@@ -583,7 +583,7 @@ public class EgovLoginController {
 	 */
 	@RequestMapping(value = "/uat/uia/refreshSessionTimeout.do")
 	public ModelAndView refreshSessionTimeout(@RequestParam Map<String, Object> commandMap) {
-		ModelAndView modelAndView = new ModelAndView();
+		final ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("jsonView");
 
 		modelAndView.addObject("result", "ok");
@@ -602,7 +602,7 @@ public class EgovLoginController {
 	public String noticeExpirePwd(@RequestParam Map<String, Object> commandMap, ModelMap model) {
 
 		// 설정된 비밀번호 유효기간을 가져온다. ex) 180이면 비밀번호 변경후 만료일이 앞으로 180일
-		String propertyExpirePwdDay = EgovProperties.getProperty("Globals.ExpirePwdDay");
+		final String propertyExpirePwdDay = EgovProperties.getProperty("Globals.ExpirePwdDay");
 		int expirePwdDay = 0;
 		try {
 			expirePwdDay = Integer.parseInt(propertyExpirePwdDay);
@@ -615,7 +615,7 @@ public class EgovLoginController {
 		model.addAttribute("expirePwdDay", expirePwdDay);
 
 		// 비밀번호 설정일로부터 몇일이 지났는지 확인한다. ex) 3이면 비빌번호 설정후 3일 경과
-		LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+		final LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 		model.addAttribute(LOGIN_VO, loginVO);
 		int passedDayChangePWD = 0;
 		if (loginVO != null) {

@@ -232,7 +232,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		// KISA 보안약점 조치 (2018-10-29, 윤창원)
 		final String enpassword = EgovFileScrty.encryptPassword(loginVO.getPassword(),
 				EgovStringUtil.isNullToString(loginVO.getId()));
-		final Map<String, String> mapParam = new ConcurrentHashMap<String, String>();
+		final Map<String, String> mapParam = new ConcurrentHashMap<>();
 		mapParam.put("USER_SE", loginVO.getUserSe());
 		mapParam.put("id", EgovStringUtil.isNullToString(loginVO.getId()));// KISA 보안약점 조치 (2018-10-29, 윤창원)
 		// 잠김시

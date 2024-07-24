@@ -33,75 +33,75 @@ public interface EgovLoginService {
 	/**
 	 * 2011.08.26 EsntlId를 이용한 로그인을 처리한다
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public LoginVO actionLoginByEsntlId(LoginVO vo);
+	public LoginVO actionLoginByEsntlId(LoginVO loginVO);
 
 	/**
 	 * 일반 로그인을 처리한다
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	LoginVO actionLogin(LoginVO vo);
+	LoginVO actionLogin(LoginVO loginVO);
 
 	/**
 	 * 인증서 로그인을 처리한다
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	LoginVO actionCrtfctLogin(LoginVO vo);
+	LoginVO actionCrtfctLogin(LoginVO loginVO);
 
 	/**
 	 * 아이디를 찾는다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	LoginVO searchId(LoginVO vo);
+	LoginVO searchId(LoginVO loginVO);
 
 	/**
 	 * 비밀번호를 찾는다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return boolean
 	 * @exception Exception
 	 */
-	boolean searchPassword(LoginVO vo);
+	boolean searchPassword(LoginVO loginVO);
 
 	/**
 	 * 로그인인증제한을 처리한다.
 	 * 
-	 * @param vo  LoginVO
+	 * @param loginVO  LoginVO
 	 * @param Map mapLockUserInfo
 	 * @return String
 	 * @exception Exception
 	 */
-	String processLoginIncorrect(LoginVO vo, Map<?, ?> mapLockUserInfo);
+	String processLoginIncorrect(LoginVO loginVO, Map<?, ?> mapLockUserInfo);
 
 	/**
 	 * 로그인인증제한을 조회한다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return Map
 	 * @exception Exception
 	 */
-	Map<?, ?> selectLoginIncorrect(LoginVO vo);
+	Map<?, ?> selectLoginIncorrect(LoginVO loginVO);
 
 	/**
 	 * 비밀번호를 수정한후 경과한 날짜를 조회한다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return int
 	 * @exception Exception
 	 */
-	int selectPassedDayChangePWD(LoginVO vo);
+	int selectPassedDayChangePWD(LoginVO loginVO);
 
 	/**
 	 * 디지털원패스 인증 회원 조회한다.

@@ -77,7 +77,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		LoginVO loginVO = loginDAO.actionLoginByEsntlId(vo);
 
 		// 3. 결과를 리턴한다.
-		if (loginVO != null && !loginVO.getId().equals("") && !loginVO.getPassword().equals("")) {
+		if (loginVO != null && !"".equals(loginVO.getId()) && !"".equals(loginVO.getPassword())) {
 			return loginVO;
 		} else {
 			loginVO = new LoginVO();
@@ -104,7 +104,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		LoginVO loginVO = loginDAO.actionLogin(vo);
 
 		// 3. 결과를 리턴한다.
-		if (loginVO != null && !loginVO.getId().equals("") && !loginVO.getPassword().equals("")) {
+		if (loginVO != null && !"".equals(loginVO.getId()) && !"".equals(loginVO.getPassword())) {
 			return loginVO;
 		} else {
 			loginVO = new LoginVO();
@@ -127,7 +127,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		LoginVO loginVO = loginDAO.actionCrtfctLogin(vo);
 
 		// 3. 결과를 리턴한다.
-		if (loginVO != null && !loginVO.getId().equals("") && !loginVO.getPassword().equals("")) {
+		if (loginVO != null && !"".equals(loginVO.getId()) && !"".equals(loginVO.getPassword())) {
 			return loginVO;
 		} else {
 			loginVO = new LoginVO();
@@ -150,7 +150,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		LoginVO loginVO = loginDAO.searchId(vo);
 
 		// 2. 결과를 리턴한다.
-		if (loginVO != null && !loginVO.getId().equals("")) {
+		if (loginVO != null && !"".equals(loginVO.getId())) {
 			return loginVO;
 		} else {
 			loginVO = new LoginVO();

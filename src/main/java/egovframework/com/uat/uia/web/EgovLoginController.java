@@ -91,6 +91,36 @@ public class EgovLoginController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovLoginController.class);
 
 	/**
+	 * 
+	 */
+	private static final String LOGIN_VO = "loginVO";
+
+	/**
+	 * 
+	 */
+	private static final String FAIL_COMMON_LOGIN = "fail.common.login";
+
+	/**
+	 * 
+	 */
+	private static final String RESULT_INFO = "resultInfo";
+
+	/**
+	 * 
+	 */
+	private static final String LOGIN_MESSAGE = "loginMessage";
+
+	/**
+	 * 
+	 */
+	private static final String EGOV_LOGIN_USR = "redirect:/uat/uia/egovLoginUsr.do";
+
+	/**
+	 * 
+	 */
+	private static final String EGOV_ID_PASSWORD_RESULT = "egovframework/com/uat/uia/EgovIdPasswordResult";
+
+	/**
 	 * 로그인 화면으로 들어간다
 	 * 
 	 * @param vo - 로그인후 이동할 URL이 담긴 LoginVO
@@ -99,7 +129,7 @@ public class EgovLoginController {
 	 */
 	@IncludedInfo(name = "로그인", listUrl = "/uat/uia/egovLoginUsr.do", order = 10, gid = 10)
 	@RequestMapping(value = "/uat/uia/egovLoginUsr.do")
-	public String loginUsrView(@ModelAttribute("loginVO") LoginVO loginVO, HttpServletRequest request,
+	public String loginUsrView(@ModelAttribute(LOGIN_VO) LoginVO loginVO, HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
 		if (EgovComponentChecker.hasComponent("mberManageService")) {
 			model.addAttribute("useMemberManage", "true");
@@ -130,9 +160,9 @@ public class EgovLoginController {
 		String authType = EgovProperties.getProperty("Globals.Auth").trim();
 		model.addAttribute("authType", authType);
 
-		String message = request.getParameter("loginMessage");
+		String message = request.getParameter(LOGIN_MESSAGE);
 		if (message != null)
-			model.addAttribute("loginMessage", message);
+			model.addAttribute(LOGIN_MESSAGE, message);
 
 		return "egovframework/com/uat/uia/EgovLoginUsr";
 	}
@@ -146,7 +176,7 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/uat/uia/actionLogin.do")
-	public String actionLogin(@ModelAttribute("loginVO") LoginVO loginVO, HttpServletRequest request, ModelMap model) {
+	public String actionLogin(@ModelAttribute(LOGIN_VO) LoginVO loginVO, HttpServletRequest request, ModelMap model) {
 
 		// 1. 로그인인증제한 활성화시
 		if (egovLoginConfig.isLock()) {
@@ -156,19 +186,17 @@ public class EgovLoginController {
 				String sLoginIncorrectCode = loginService.processLoginIncorrect(loginVO, mapLockUserInfo);
 				if (!sLoginIncorrectCode.equals("E")) {
 					if (sLoginIncorrectCode.equals("L")) {
-						model.addAttribute("loginMessage",
-								egovMessageSource.getMessageArgs("fail.common.loginIncorrect",
-										new Object[] { egovLoginConfig.getLockCount(), request.getLocale() }));
+						model.addAttribute(LOGIN_MESSAGE, egovMessageSource.getMessageArgs("fail.common.loginIncorrect",
+								new Object[] { egovLoginConfig.getLockCount(), request.getLocale() }));
 					} else if (sLoginIncorrectCode.equals("C")) {
-						model.addAttribute("loginMessage",
-								egovMessageSource.getMessage("fail.common.login", request.getLocale()));
+						model.addAttribute(LOGIN_MESSAGE,
+								egovMessageSource.getMessage(FAIL_COMMON_LOGIN, request.getLocale()));
 					}
-					return "redirect:/uat/uia/egovLoginUsr.do";
+					return EGOV_LOGIN_USR;
 				}
 			} else {
-				model.addAttribute("loginMessage",
-						egovMessageSource.getMessage("fail.common.login", request.getLocale()));
-				return "redirect:/uat/uia/egovLoginUsr.do";
+				model.addAttribute(LOGIN_MESSAGE, egovMessageSource.getMessage(FAIL_COMMON_LOGIN, request.getLocale()));
+				return EGOV_LOGIN_USR;
 			}
 		}
 
@@ -182,15 +210,15 @@ public class EgovLoginController {
 		if (resultVO.getId() != null && !resultVO.getId().equals("")) {
 
 			// 3-1. 로그인 정보를 세션에 저장
-			request.getSession().setAttribute("loginVO", resultVO);
+			request.getSession().setAttribute(LOGIN_VO, resultVO);
 			// 2019.10.01 로그인 인증세션 추가
 			request.getSession().setAttribute("accessUser", resultVO.getUserSe().concat(resultVO.getId()));
 
 			return "redirect:/uat/uia/actionMain.do";
 
 		} else {
-			model.addAttribute("loginMessage", egovMessageSource.getMessage("fail.common.login", request.getLocale()));
-			return "redirect:/uat/uia/egovLoginUsr.do";
+			model.addAttribute(LOGIN_MESSAGE, egovMessageSource.getMessage(FAIL_COMMON_LOGIN, request.getLocale()));
+			return EGOV_LOGIN_USR;
 		}
 	}
 
@@ -202,7 +230,7 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/uat/uia/actionCrtfctLogin.do")
-	public String actionCrtfctLogin(@ModelAttribute("loginVO") LoginVO loginVO, HttpServletRequest request,
+	public String actionCrtfctLogin(@ModelAttribute(LOGIN_VO) LoginVO loginVO, HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
 
 		// 접속IP
@@ -245,17 +273,16 @@ public class EgovLoginController {
 		 * resultVO.getUserSe() + resultVO.getId() + "&j_password=" +
 		 * resultVO.getUniqId();
 		 * 
-		 * }else{ // 3-2. 로그인 정보를 세션에 저장 request.getSession().setAttribute("loginVO",
+		 * }else{ // 3-2. 로그인 정보를 세션에 저장 request.getSession().setAttribute(LOGIN_VO,
 		 * resultVO); return "redirect:/uat/uia/actionMain.do"; }
 		 * 
 		 * 
 		 * } else { model.addAttribute("message",
-		 * egovMessageSource.getMessage("fail.common.login")); return
-		 * "redirect:/uat/uia/egovLoginUsr.do"; } } else { model.addAttribute("message",
-		 * egovMessageSource.getMessage("fail.common.login")); return
-		 * "redirect:/uat/uia/egovLoginUsr.do"; }
+		 * egovMessageSource.getMessage(FAIL_COMMON_LOGIN)); return EGOV_LOGIN_USR; } }
+		 * else { model.addAttribute("message",
+		 * egovMessageSource.getMessage(FAIL_COMMON_LOGIN)); return EGOV_LOGIN_USR; }
 		 */
-		return "redirect:/uat/uia/egovLoginUsr.do";
+		return EGOV_LOGIN_USR;
 	}
 
 	/**
@@ -271,8 +298,8 @@ public class EgovLoginController {
 		// 1. Spring Security 사용자권한 처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 		if (!isAuthenticated) {
-			model.addAttribute("loginMessage", egovMessageSource.getMessage("fail.common.login"));
-			return "redirect:/uat/uia/egovLoginUsr.do";
+			model.addAttribute(LOGIN_MESSAGE, egovMessageSource.getMessage(FAIL_COMMON_LOGIN));
+			return EGOV_LOGIN_USR;
 		}
 		LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 
@@ -334,7 +361,7 @@ public class EgovLoginController {
 		 * // 1. Security 연동 return "redirect:/j_spring_security_logout";
 		 */
 
-		request.getSession().setAttribute("loginVO", null);
+		request.getSession().setAttribute(LOGIN_VO, null);
 		// 세션모드인경우 Authority 초기화
 		// List<String> authList = (List<String>)EgovUserDetailsHelper.getAuthorities();
 		request.getSession().setAttribute("accessUser", null);
@@ -381,7 +408,7 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/uat/uia/searchId.do")
-	public String searchId(@ModelAttribute("loginVO") LoginVO loginVO, ModelMap model) {
+	public String searchId(@ModelAttribute(LOGIN_VO) LoginVO loginVO, ModelMap model) {
 
 		if (loginVO == null || loginVO.getName() == null || loginVO.getName().equals("") && loginVO.getEmail() == null
 				|| loginVO.getEmail().equals("") && loginVO.getUserSe() == null || loginVO.getUserSe().equals("")) {
@@ -394,11 +421,11 @@ public class EgovLoginController {
 
 		if (resultVO != null && resultVO.getId() != null && !resultVO.getId().equals("")) {
 
-			model.addAttribute("resultInfo", "아이디는 " + resultVO.getId() + " 입니다.");
-			return "egovframework/com/uat/uia/EgovIdPasswordResult";
+			model.addAttribute(RESULT_INFO, "아이디는 " + resultVO.getId() + " 입니다.");
+			return EGOV_ID_PASSWORD_RESULT;
 		} else {
-			model.addAttribute("resultInfo", egovMessageSource.getMessage("fail.common.idsearch"));
-			return "egovframework/com/uat/uia/EgovIdPasswordResult";
+			model.addAttribute(RESULT_INFO, egovMessageSource.getMessage("fail.common.idsearch"));
+			return EGOV_ID_PASSWORD_RESULT;
 		}
 	}
 
@@ -410,7 +437,7 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/uat/uia/searchPassword.do")
-	public String searchPassword(@ModelAttribute("loginVO") LoginVO loginVO, ModelMap model) {
+	public String searchPassword(@ModelAttribute(LOGIN_VO) LoginVO loginVO, ModelMap model) {
 
 		// KISA 보안약점 조치 (2018-10-29, 윤창원)
 		if (loginVO == null || loginVO.getId() == null || loginVO.getId().equals("") && loginVO.getName() == null
@@ -427,11 +454,11 @@ public class EgovLoginController {
 
 		// 2. 결과 리턴
 		if (result) {
-			model.addAttribute("resultInfo", "임시 비밀번호를 발송하였습니다.");
-			return "egovframework/com/uat/uia/EgovIdPasswordResult";
+			model.addAttribute(RESULT_INFO, "임시 비밀번호를 발송하였습니다.");
+			return EGOV_ID_PASSWORD_RESULT;
 		} else {
-			model.addAttribute("resultInfo", egovMessageSource.getMessage("fail.common.pwsearch"));
-			return "egovframework/com/uat/uia/EgovIdPasswordResult";
+			model.addAttribute(RESULT_INFO, egovMessageSource.getMessage("fail.common.pwsearch"));
+			return EGOV_ID_PASSWORD_RESULT;
 		}
 	}
 
@@ -576,7 +603,7 @@ public class EgovLoginController {
 
 		// 비밀번호 설정일로부터 몇일이 지났는지 확인한다. ex) 3이면 비빌번호 설정후 3일 경과
 		LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
-		model.addAttribute("loginVO", loginVO);
+		model.addAttribute(LOGIN_VO, loginVO);
 		int passedDayChangePWD = 0;
 		if (loginVO != null) {
 			LOGGER.debug("===>>> loginVO.getId() = " + loginVO.getId());

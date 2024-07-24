@@ -481,7 +481,7 @@ public class EgovLoginController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/uat/uia/getEncodingData.do")
-	public void getEncodingData() {
+	public void encodingData() {
 
 //		/*
 //		 * X509Certificate x509Cert = null; byte[] cert = null; String base64cert =

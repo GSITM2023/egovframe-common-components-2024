@@ -30,6 +30,7 @@ import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.com.uat.uia.service.EgovLoginService;
 import egovframework.com.utl.fcc.service.EgovStringUtil;
 import egovframework.com.utl.sim.service.EgovClntInfo;
+import lombok.NoArgsConstructor;
 
 /*
 import com.gpki.gpkiapi.cert.X509Certificate;
@@ -68,6 +69,7 @@ import com.gpki.servlet.GPKIHttpServletResponse;
  *      </pre>
  */
 @Controller
+@NoArgsConstructor
 public class EgovLoginController {
 
 	/** EgovLoginService */

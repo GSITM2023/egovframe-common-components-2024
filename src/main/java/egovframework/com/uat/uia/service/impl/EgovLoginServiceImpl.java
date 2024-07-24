@@ -97,7 +97,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	public LoginVO actionLogin(LoginVO vo) {
 
 		// 1. 입력한 비밀번호를 암호화한다.
-		String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(), vo.getId());
+		final String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(), vo.getId());
 		vo.setPassword(enpassword);
 
 		// 2. 아이디와 암호화된 비밀번호가 DB와 일치하는지 확인한다.
@@ -172,7 +172,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		boolean result = true;
 
 		// 1. 아이디, 이름, 이메일주소, 비밀번호 힌트, 비밀번호 정답이 DB와 일치하는 사용자 Password를 조회한다.
-		LoginVO loginVO = loginDAO.searchPassword(vo);
+		final LoginVO loginVO = loginDAO.searchPassword(vo);
 		if (loginVO == null || loginVO.getPassword() == null || "".equals(loginVO.getPassword())) {
 			return false;
 		}
@@ -190,15 +190,15 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		}
 
 		// 3. 임시 비밀번호를 암호화하여 DB에 저장한다.
-		LoginVO pwVO = new LoginVO();
-		String enpassword = EgovFileScrty.encryptPassword(newpassword, vo.getId());
+		final LoginVO pwVO = new LoginVO();
+		final String enpassword = EgovFileScrty.encryptPassword(newpassword, vo.getId());
 		pwVO.setId(vo.getId());
 		pwVO.setPassword(enpassword);
 		pwVO.setUserSe(vo.getUserSe());
 		loginDAO.updatePassword(pwVO);
 
 		// 4. 임시 비밀번호를 이메일 발송한다.(메일연동솔루션 활용)
-		SndngMailVO sndngMailVO = new SndngMailVO();
+		final SndngMailVO sndngMailVO = new SndngMailVO();
 		sndngMailVO.setDsptchPerson("webmaster");
 		sndngMailVO.setRecptnPerson(vo.getEmail());
 		sndngMailVO.setSj("[MOIS] 임시 비밀번호를 발송했습니다.");
@@ -234,8 +234,9 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	public String processLoginIncorrect(LoginVO vo, Map<?, ?> mapLockUserInfo) {
 		String sRtnCode = "C";
 		// KISA 보안약점 조치 (2018-10-29, 윤창원)
-		String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(), EgovStringUtil.isNullToString(vo.getId()));
-		Map<String, String> mapParam = new HashMap<String, String>();
+		final String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(),
+				EgovStringUtil.isNullToString(vo.getId()));
+		final Map<String, String> mapParam = new HashMap<String, String>();
 		mapParam.put("USER_SE", vo.getUserSe());
 		mapParam.put("id", EgovStringUtil.isNullToString(vo.getId()));// KISA 보안약점 조치 (2018-10-29, 윤창원)
 		// 잠김시
@@ -286,7 +287,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 */
 	@Override
 	public LoginVO onepassLogin(String id) {
-		LoginVO loginVO = loginDAO.onepassLogin(id);
+		final LoginVO loginVO = loginDAO.onepassLogin(id);
 		return loginVO;
 	}
 

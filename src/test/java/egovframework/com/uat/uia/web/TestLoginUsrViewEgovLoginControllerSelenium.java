@@ -29,6 +29,10 @@ public class TestLoginUsrViewEgovLoginControllerSelenium {
 		// 업무 탭 클릭
 		WebElement typeUsr = driver.findElement(By.id("typeUsr"));
 		typeUsr.click();
+
+		// 아이디 입력
+		WebElement id = driver.findElement(By.id("id"));
+		id.sendKeys("TEST1");
 	}
 
 }

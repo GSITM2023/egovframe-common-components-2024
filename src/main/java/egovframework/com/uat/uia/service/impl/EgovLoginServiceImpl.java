@@ -43,6 +43,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements EgovLoginService {
 
+	/**
+	 * 일반 로그인, 인증서 로그인을 처리하는 DAO 클래스
+	 */
 	@Resource(name = "loginDAO")
 	private LoginDAO loginDAO;
 
@@ -50,6 +53,9 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	@Resource(name = "sndngMailRegistService")
 	private EgovSndngMailRegistService sndngMailRegistService;
 
+	/**
+	 * EgovLoginConfig 클래스 사용자 인증수행제한에 대한 설정을 관리하는 클래스 N/A
+	 */
 	@Resource(name = "egovLoginConfig")
 	private EgovLoginConfig egovLoginConfig;
 

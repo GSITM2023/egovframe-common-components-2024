@@ -169,8 +169,6 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	@Override
 	public boolean searchPassword(final LoginVO vo) {
 
-		boolean result = true;
-
 		// 1. 아이디, 이름, 이메일주소, 비밀번호 힌트, 비밀번호 정답이 DB와 일치하는 사용자 Password를 조회한다.
 		final LoginVO loginVO = loginDAO.searchPassword(vo);
 		if (loginVO == null || loginVO.getPassword() == null || "".equals(loginVO.getPassword())) {
@@ -205,9 +203,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 		sndngMailVO.setEmailCn("고객님의 임시 비밀번호는 " + newpassword + " 입니다.");
 		sndngMailVO.setAtchFileId("");
 
-		result = sndngMailRegistService.insertSndngMail(sndngMailVO);
-
-		return result;
+		return sndngMailRegistService.insertSndngMail(sndngMailVO);
 	}
 
 	/**

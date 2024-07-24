@@ -283,8 +283,7 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 */
 	@Override
 	public LoginVO onepassLogin(final String id) {
-		final LoginVO loginVO = loginDAO.onepassLogin(id);
-		return loginVO;
+		return loginDAO.onepassLogin(id);
 	}
 
 }

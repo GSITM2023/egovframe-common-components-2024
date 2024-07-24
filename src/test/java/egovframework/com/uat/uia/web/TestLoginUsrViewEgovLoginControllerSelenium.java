@@ -20,25 +20,30 @@ public class TestLoginUsrViewEgovLoginControllerSelenium {
 	}
 
 	@Test
-	public void test() {
+	public void test() throws InterruptedException {
 		driver.get("http://localhost:8080/egovframework-all-in-one/uat/uia/egovLoginUsr.do");
+		Thread.sleep(3000);
 
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 
 		// 새로고침
 		executor.executeScript("location.reload();");
+		Thread.sleep(3000);
 
 		// 업무 탭 클릭
 		WebElement typeUsr = driver.findElement(By.id("typeUsr"));
 		typeUsr.click();
+		Thread.sleep(3000);
 
 		// 아이디 입력
 		WebElement id = driver.findElement(By.id("id"));
 		id.sendKeys("TEST1");
+		Thread.sleep(3000);
 
 		// 비밀번호 입력
 		WebElement password = driver.findElement(By.id("password"));
 		password.sendKeys("rhdxhd12");
+		Thread.sleep(3000);
 
 		// 로그인 버튼 클릭
 		executor.executeScript("actionLogin();");

@@ -37,7 +37,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public LoginVO actionLoginByEsntlId(final LoginVO loginVO) {
 		return (LoginVO) selectOne("LoginUsr.ssoLoginByEsntlId", loginVO);
@@ -48,7 +47,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public LoginVO actionLogin(final LoginVO loginVO) {
 		return (LoginVO) selectOne("LoginUsr.actionLogin", loginVO);
@@ -59,7 +57,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public LoginVO actionCrtfctLogin(final LoginVO loginVO) {
 
@@ -71,7 +68,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public LoginVO searchId(final LoginVO loginVO) {
 
@@ -83,7 +79,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public LoginVO searchPassword(final LoginVO loginVO) {
 
@@ -94,7 +89,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 변경된 비밀번호를 저장한다.
 	 * 
 	 * @param loginVO LoginVO
-	 * @exception Exception
 	 */
 	public void updatePassword(final LoginVO loginVO) {
 		update("LoginUsr.updatePassword", loginVO);
@@ -105,7 +99,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public Map<?, ?> selectLoginIncorrect(final LoginVO loginVO) {
 		return (Map<?, ?>) selectOne("LoginUsr.selectLoginIncorrect", loginVO);
@@ -116,7 +109,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param vo LoginVO
 	 * @return vod
-	 * @exception Exception
 	 */
 	public void updateLoginIncorrect(final Map<?, ?> map) {
 		update("LoginUsr.updateLoginIncorrect" + map.get("USER_SE"), map);
@@ -127,7 +119,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public int selectPassedDayChangePWD(final LoginVO loginVO) {
 		return selectOne("LoginUsr.selectPassedDayChangePWD", loginVO);
@@ -138,7 +129,6 @@ public class LoginDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param id
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	public LoginVO onepassLogin(final String id) {
 		return (LoginVO) selectOne("LoginUsr.onepassLogin", id);

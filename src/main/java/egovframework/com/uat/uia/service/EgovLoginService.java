@@ -35,7 +35,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	LoginVO actionLoginByEsntlId(LoginVO loginVO);
 
@@ -44,7 +43,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	LoginVO actionLogin(LoginVO loginVO);
 
@@ -53,7 +51,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	LoginVO actionCrtfctLogin(LoginVO loginVO);
 
@@ -62,7 +59,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	LoginVO searchId(LoginVO loginVO);
 
@@ -71,7 +67,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return boolean
-	 * @exception Exception
 	 */
 	boolean searchPassword(LoginVO loginVO);
 
@@ -81,7 +76,6 @@ public interface EgovLoginService {
 	 * @param loginVO LoginVO
 	 * @param Map     mapLockUserInfo
 	 * @return String
-	 * @exception Exception
 	 */
 	String processLoginIncorrect(LoginVO loginVO, Map<?, ?> mapLockUserInfo);
 
@@ -90,7 +84,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return Map
-	 * @exception Exception
 	 */
 	Map<?, ?> selectLoginIncorrect(LoginVO loginVO);
 
@@ -99,7 +92,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param loginVO LoginVO
 	 * @return int
-	 * @exception Exception
 	 */
 	int selectPassedDayChangePWD(LoginVO loginVO);
 
@@ -108,7 +100,6 @@ public interface EgovLoginService {
 	 * 
 	 * @param id
 	 * @return LoginVO
-	 * @exception Exception
 	 */
 	LoginVO onepassLogin(String id);
 }

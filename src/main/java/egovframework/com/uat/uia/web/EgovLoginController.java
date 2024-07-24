@@ -129,7 +129,6 @@ public class EgovLoginController {
 	 * 
 	 * @param vo - 로그인후 이동할 URL이 담긴 LoginVO
 	 * @return 로그인 페이지
-	 * @exception Exception
 	 */
 	@IncludedInfo(name = "로그인", listUrl = "/uat/uia/egovLoginUsr.do", order = 10, gid = 10)
 	@RequestMapping("/uat/uia/egovLoginUsr.do")
@@ -177,7 +176,6 @@ public class EgovLoginController {
 	 * @param vo      - 아이디, 비밀번호가 담긴 LoginVO
 	 * @param request - 세션처리를 위한 HttpServletRequest
 	 * @return result - 로그인결과(세션정보)
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/actionLogin.do")
 	public String actionLogin(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final HttpServletRequest request,
@@ -232,7 +230,6 @@ public class EgovLoginController {
 	 * 
 	 * @param vo - 주민번호가 담긴 LoginVO
 	 * @return result - 로그인결과(세션정보)
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/actionCrtfctLogin.do")
 	public String actionCrtfctLogin(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final HttpServletRequest request,
@@ -295,7 +292,6 @@ public class EgovLoginController {
 	 * 
 	 * @param
 	 * @return 로그인 페이지
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/actionMain.do")
 	public String actionMain(final HttpServletRequest request, final Model model) {
@@ -360,7 +356,6 @@ public class EgovLoginController {
 	 * 로그아웃한다.
 	 * 
 	 * @return String
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/actionLogout.do")
 	public String actionLogout(final HttpSession session, Model model) {
@@ -385,7 +380,6 @@ public class EgovLoginController {
 	 * 
 	 * @param
 	 * @return 아이디/비밀번호 찾기 페이지
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/egovIdPasswordSearch.do")
 	public String idPasswordSearchView(final Model model) {
@@ -403,7 +397,6 @@ public class EgovLoginController {
 	 * 인증서안내 화면으로 들어간다
 	 * 
 	 * @return 인증서안내 페이지
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/egovGpkiIssu.do")
 	public String gpkiIssuView(Model model) {
@@ -415,7 +408,6 @@ public class EgovLoginController {
 	 * 
 	 * @param vo - 이름, 이메일주소, 사용자구분이 담긴 LoginVO
 	 * @return result - 아이디
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/searchId.do")
 	public String searchId(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final Model model) {
@@ -444,7 +436,6 @@ public class EgovLoginController {
 	 * 
 	 * @param vo - 아이디, 이름, 이메일주소, 비밀번호 힌트, 비밀번호 정답, 사용자구분이 담긴 LoginVO
 	 * @return result - 임시비밀번호전송결과
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/searchPassword.do")
 	public String searchPassword(@ModelAttribute(LOGIN_VO) final LoginVO loginVO, final Model model) {
@@ -477,7 +468,6 @@ public class EgovLoginController {
 	 * EgovGpkiVariables.js의 ServerCert에 넣는다.
 	 * 
 	 * @return String
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/getEncodingData.do")
 	public void encodingData() {
@@ -497,7 +487,6 @@ public class EgovLoginController {
 	 * 인증서 DN추출 팝업을 호출한다.
 	 * 
 	 * @return 인증서 등록 페이지
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/EgovGpkiRegist.do")
 	public String gpkiRegistView(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -534,7 +523,6 @@ public class EgovLoginController {
 	 * 인증서 DN값을 추출한다
 	 * 
 	 * @return result - dn값
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/actionGpkiRegist.do")
 	public String actionGpkiRegist(final HttpServletRequest request, HttpServletResponse response, final Model model) {
@@ -578,7 +566,6 @@ public class EgovLoginController {
 	 * 한다.
 	 * 
 	 * @return result - String
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/refreshSessionTimeout.do")
 	public ModelAndView refreshSessionTimeout(@RequestParam Map<String, Object> commandMap) {
@@ -595,7 +582,6 @@ public class EgovLoginController {
 	 * 한다.
 	 * 
 	 * @return result - String
-	 * @exception Exception
 	 */
 	@RequestMapping("/uat/uia/noticeExpirePwd.do")
 	public String noticeExpirePwd(@RequestParam Map<String, Object> commandMap, final Model model) {

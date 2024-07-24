@@ -35,80 +35,80 @@ public class LoginDAO extends EgovComAbstractDAO {
 	/**
 	 * 2011.08.26 EsntlId를 이용한 로그인을 처리한다
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public LoginVO actionLoginByEsntlId(final LoginVO vo) {
-		return (LoginVO) selectOne("LoginUsr.ssoLoginByEsntlId", vo);
+	public LoginVO actionLoginByEsntlId(final LoginVO loginVO) {
+		return (LoginVO) selectOne("LoginUsr.ssoLoginByEsntlId", loginVO);
 	}
 
 	/**
 	 * 일반 로그인을 처리한다
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public LoginVO actionLogin(final LoginVO vo) {
-		return (LoginVO) selectOne("LoginUsr.actionLogin", vo);
+	public LoginVO actionLogin(final LoginVO loginVO) {
+		return (LoginVO) selectOne("LoginUsr.actionLogin", loginVO);
 	}
 
 	/**
 	 * 인증서 로그인을 처리한다
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public LoginVO actionCrtfctLogin(final LoginVO vo) {
+	public LoginVO actionCrtfctLogin(final LoginVO loginVO) {
 
-		return (LoginVO) selectOne("LoginUsr.actionCrtfctLogin", vo);
+		return (LoginVO) selectOne("LoginUsr.actionCrtfctLogin", loginVO);
 	}
 
 	/**
 	 * 아이디를 찾는다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public LoginVO searchId(final LoginVO vo) {
+	public LoginVO searchId(final LoginVO loginVO) {
 
-		return (LoginVO) selectOne("LoginUsr.searchId", vo);
+		return (LoginVO) selectOne("LoginUsr.searchId", loginVO);
 	}
 
 	/**
 	 * 비밀번호를 찾는다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public LoginVO searchPassword(final LoginVO vo) {
+	public LoginVO searchPassword(final LoginVO loginVO) {
 
-		return (LoginVO) selectOne("LoginUsr.searchPassword", vo);
+		return (LoginVO) selectOne("LoginUsr.searchPassword", loginVO);
 	}
 
 	/**
 	 * 변경된 비밀번호를 저장한다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @exception Exception
 	 */
-	public void updatePassword(final LoginVO vo) {
-		update("LoginUsr.updatePassword", vo);
+	public void updatePassword(final LoginVO loginVO) {
+		update("LoginUsr.updatePassword", loginVO);
 	}
 
 	/**
 	 * 로그인인증제한 내역을 조회한다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public Map<?, ?> selectLoginIncorrect(final LoginVO vo) {
-		return (Map<?, ?>) selectOne("LoginUsr.selectLoginIncorrect", vo);
+	public Map<?, ?> selectLoginIncorrect(final LoginVO loginVO) {
+		return (Map<?, ?>) selectOne("LoginUsr.selectLoginIncorrect", loginVO);
 	}
 
 	/**
@@ -125,12 +125,12 @@ public class LoginDAO extends EgovComAbstractDAO {
 	/**
 	 * 비밀번호를 수정한후 경과한 날짜를 조회한다.
 	 * 
-	 * @param vo LoginVO
+	 * @param loginVO LoginVO
 	 * @return LoginVO
 	 * @exception Exception
 	 */
-	public int selectPassedDayChangePWD(final LoginVO vo) {
-		return selectOne("LoginUsr.selectPassedDayChangePWD", vo);
+	public int selectPassedDayChangePWD(final LoginVO loginVO) {
+		return selectOne("LoginUsr.selectPassedDayChangePWD", loginVO);
 	}
 
 	/**

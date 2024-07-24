@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
+import lombok.NoArgsConstructor;
 
 /**
  * 일반 로그인, 인증서 로그인을 처리하는 DAO 클래스
@@ -28,6 +29,7 @@ import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
  *      </pre>
  */
 @Repository("loginDAO")
+@NoArgsConstructor
 public class LoginDAO extends EgovComAbstractDAO {
 
 	/**

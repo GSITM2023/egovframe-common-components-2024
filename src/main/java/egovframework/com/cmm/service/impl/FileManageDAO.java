@@ -30,9 +30,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 *
 	 * @param fileList
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	public String insertFileInfs(List<FileVO> fileList) throws Exception {
+	public String insertFileInfs(List<FileVO> fileList)  {
 		FileVO vo = fileList.get(0);
 		String atchFileId = vo.getAtchFileId();
 
@@ -52,9 +52,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 하나의 파일에 대한 정보(속성 및 상세)를 등록한다.
 	 *
 	 * @param vo
-	 * @throws Exception
+	 * @
 	 */
-	public void insertFileInf(FileVO vo) throws Exception {
+	public void insertFileInf(FileVO vo)  {
 		insert("FileManageDAO.insertFileMaster", vo);
 		insert("FileManageDAO.insertFileDetail", vo);
 	}
@@ -63,9 +63,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 여러 개의 파일에 대한 정보(속성 및 상세)를 수정한다.
 	 *
 	 * @param fileList
-	 * @throws Exception
+	 * @
 	 */
-	public void updateFileInfs(List<FileVO> fileList) throws Exception {
+	public void updateFileInfs(List<FileVO> fileList)  {
 		FileVO vo;
 		Iterator<FileVO> iter = fileList.iterator();
 		while (iter.hasNext()) {
@@ -78,9 +78,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 여러 개의 파일을 삭제한다.
 	 *
 	 * @param fileList
-	 * @throws Exception
+	 * @
 	 */
-	public void deleteFileInfs(List<FileVO> fileList) throws Exception {
+	public void deleteFileInfs(List<FileVO> fileList)  {
 		Iterator<FileVO> iter = fileList.iterator();
 		FileVO vo;
 		while (iter.hasNext()) {
@@ -94,9 +94,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 하나의 파일을 삭제한다.
 	 *
 	 * @param fvo
-	 * @throws Exception
+	 * @
 	 */
-	public void deleteFileInf(FileVO fvo) throws Exception {
+	public void deleteFileInf(FileVO fvo)  {
 		delete("FileManageDAO.deleteFileDetail", fvo);
 	}
 
@@ -105,9 +105,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 *
 	 * @param vo
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	public List<FileVO> selectFileInfs(FileVO vo) throws Exception {
+	public List<FileVO> selectFileInfs(FileVO vo)  {
 		return selectList("FileManageDAO.selectFileList", vo);
 	}
 
@@ -116,9 +116,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 *
 	 * @param fvo
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	public int getMaxFileSN(FileVO fvo) throws Exception {
+	public int getMaxFileSN(FileVO fvo)  {
 		return (Integer) selectOne("FileManageDAO.getMaxFileSN", fvo);
 	}
 
@@ -127,9 +127,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 *
 	 * @param fvo
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	public FileVO selectFileInf(FileVO fvo) throws Exception {
+	public FileVO selectFileInf(FileVO fvo)  {
 		return (FileVO) selectOne("FileManageDAO.selectFileInf", fvo);
 	}
 
@@ -137,9 +137,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 전체 파일을 삭제한다.
 	 *
 	 * @param fvo
-	 * @throws Exception
+	 * @
 	 */
-	public void deleteAllFileInf(FileVO fvo) throws Exception {
+	public void deleteAllFileInf(FileVO fvo)  {
 		update("FileManageDAO.deleteCOMTNFILE", fvo);
 	}
 
@@ -148,9 +148,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 *
 	 * @param vo
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	public List<FileVO> selectFileListByFileNm(FileVO fvo) throws Exception {
+	public List<FileVO> selectFileListByFileNm(FileVO fvo)  {
 		return selectList("FileManageDAO.selectFileListByFileNm", fvo);
 	}
 
@@ -159,9 +159,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 *
 	 * @param fvo
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	public int selectFileListCntByFileNm(FileVO fvo) throws Exception {
+	public int selectFileListCntByFileNm(FileVO fvo)  {
 		return (Integer) selectOne("FileManageDAO.selectFileListCntByFileNm", fvo);
 	}
 
@@ -170,9 +170,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 *
 	 * @param vo
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	public List<FileVO> selectImageFileList(FileVO vo) throws Exception {
+	public List<FileVO> selectImageFileList(FileVO vo)  {
 		return selectList("FileManageDAO.selectImageFileList", vo);
 	}
 }

@@ -2,8 +2,10 @@ package egovframework.com.uat.uia.web;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestLoginUsrViewEgovLoginControllerSelenium {
@@ -24,6 +26,10 @@ public class TestLoginUsrViewEgovLoginControllerSelenium {
 
 		// 새로고침
 		executor.executeScript("location.reload();");
+
+		// 업무 탭 클릭
+		WebElement typeUsr = driver.findElement(By.id("typeUsr"));
+		typeUsr.click();
 	}
 
 }

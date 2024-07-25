@@ -60,9 +60,9 @@ public class EgovFileScrty {
      * @param String source 암호화할 파일
      * @param String target 암호화된 파일
      * @return boolean result 암호화여부 True/False
-     * @exception Exception
+     * 
      */
-    public static boolean encryptFile(String source, String target) throws Exception {
+    public static boolean encryptFile(String source, String target)  {
 
 		// 암호화 여부
 		boolean result = false;
@@ -102,9 +102,9 @@ public class EgovFileScrty {
      * @param String source 복호화할 파일
      * @param String target 복호화된 파일
      * @return boolean result 복호화여부 True/False
-     * @exception Exception
+     * 
      */
-    public static boolean decryptFile(String source, String target) throws Exception {
+    public static boolean decryptFile(String source, String target)  {
 
 		// 복호화 여부
 		boolean result = false;
@@ -142,9 +142,9 @@ public class EgovFileScrty {
      *
      * @param byte[] data 암호화할 데이터
      * @return String result 암호화된 데이터
-     * @exception Exception
+     * 
      */
-    public static String encodeBinary(byte[] data) throws Exception {
+    public static String encodeBinary(byte[] data)  {
 		if (data == null) {
 		    return "";
 		}
@@ -157,10 +157,10 @@ public class EgovFileScrty {
      *
      * @param String data 암호화할 데이터
      * @return String result 암호화된 데이터
-     * @exception Exception
+     * 
      */
     @Deprecated
-    public static String encode(String data) throws Exception {
+    public static String encode(String data)  {
     	return encodeBinary(data.getBytes());
     }
 
@@ -169,9 +169,9 @@ public class EgovFileScrty {
      *
      * @param String data 복호화할 데이터
      * @return String result 복호화된 데이터
-     * @exception Exception
+     * 
      */
-    public static byte[] decodeBinary(String data) throws Exception {
+    public static byte[] decodeBinary(String data)  {
     	return Base64.decodeBase64(data.getBytes());
     }
 
@@ -180,10 +180,10 @@ public class EgovFileScrty {
      *
      * @param String data 복호화할 데이터
      * @return String result 복호화된 데이터
-     * @exception Exception
+     * 
      */
     @Deprecated
-    public static String decode(String data) throws Exception {
+    public static String decode(String data)  {
     	return new String(decodeBinary(data));
     }
 
@@ -193,9 +193,9 @@ public class EgovFileScrty {
      * @param password 암호화될 패스워드
      * @param id salt로 사용될 사용자 ID 지정
      * @return
-     * @throws Exception
+     * @
      */
-    public static String encryptPassword(String password, String id) throws Exception {
+    public static String encryptPassword(String password, String id)  {
 
 		if (password == null) return "";
 		if (id == null) return ""; // KISA 보안약점 조치 (2018-12-11, 신용호)
@@ -217,9 +217,9 @@ public class EgovFileScrty {
      * @param data 암호화할 비밀번호
      * @param salt Salt
      * @return 암호화된 비밀번호
-     * @throws Exception
+     * @
      */
-    public static String encryptPassword(String data, byte[] salt) throws Exception {
+    public static String encryptPassword(String data, byte[] salt)  {
 
 		if (data == null) {
 		    return "";
@@ -243,9 +243,9 @@ public class EgovFileScrty {
      * @param data 원 패스워드
      * @param encoded 해쉬처리된 패스워드(Base64 인코딩)
      * @return
-     * @throws Exception
+     * @
      */
-    public static boolean checkPassword(String data, String encoded, byte[] salt) throws Exception {
+    public static boolean checkPassword(String data, String encoded, byte[] salt)  {
     	byte[] hashValue = null; // 해쉬값
     	
     	MessageDigest md = MessageDigest.getInstance("SHA-256");

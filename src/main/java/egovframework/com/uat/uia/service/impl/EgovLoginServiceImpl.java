@@ -55,10 +55,10 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * EsntlId를 이용한 로그인을 처리한다
 	 * @param vo LoginVO
 	 * @return LoginVO
-	 * @exception Exception
+	 * 
 	 */
     @Override
-	public LoginVO actionLoginByEsntlId(LoginVO vo) throws Exception {
+	public LoginVO actionLoginByEsntlId(LoginVO vo)  {
 
     	LoginVO loginVO = loginDAO.actionLoginByEsntlId(vo);
 
@@ -77,10 +77,10 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * 일반 로그인을 처리한다
 	 * @param vo LoginVO
 	 * @return LoginVO
-	 * @exception Exception
+	 * 
 	 */
     @Override
-	public LoginVO actionLogin(LoginVO vo) throws Exception {
+	public LoginVO actionLogin(LoginVO vo)  {
 
     	// 1. 입력한 비밀번호를 암호화한다.
 		String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(), vo.getId());
@@ -103,10 +103,10 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * 인증서 로그인을 처리한다
 	 * @param vo LoginVO
 	 * @return LoginVO
-	 * @exception Exception
+	 * 
 	 */
 	@Override
-	public LoginVO actionCrtfctLogin(LoginVO vo) throws Exception {
+	public LoginVO actionCrtfctLogin(LoginVO vo)  {
 
     	// 1. DN값으로 ID, PW를 조회한다.
     	LoginVO loginVO = loginDAO.actionCrtfctLogin(vo);
@@ -125,10 +125,10 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * 아이디를 찾는다.
 	 * @param vo LoginVO
 	 * @return LoginVO
-	 * @exception Exception
+	 * 
 	 */
     @Override
-	public LoginVO searchId(LoginVO vo) throws Exception {
+	public LoginVO searchId(LoginVO vo)  {
 
     	// 1. 이름, 이메일주소가 DB와 일치하는 사용자 ID를 조회한다.
     	LoginVO loginVO = loginDAO.searchId(vo);
@@ -147,10 +147,10 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * 비밀번호를 찾는다.
 	 * @param vo LoginVO
 	 * @return boolean
-	 * @exception Exception
+	 * 
 	 */
     @Override
-	public boolean searchPassword(LoginVO vo) throws Exception {
+	public boolean searchPassword(LoginVO vo)  {
 
     	boolean result = true;
 
@@ -198,9 +198,9 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * 로그인인증제한을 조회한다.
 	 * @param vo LoginVO
 	 * @return Map
-	 * @exception Exception
+	 * 
 	 */
-    public Map<?,?> selectLoginIncorrect(LoginVO vo) throws Exception{
+    public Map<?,?> selectLoginIncorrect(LoginVO vo) {
     	return loginDAO.selectLoginIncorrect(vo);
     }
     
@@ -209,9 +209,9 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * @param vo LoginVO
 	 * @param vo mapLockUserInfo
 	 * @return String
-	 * @exception Exception
+	 * 
 	 */
-    public String processLoginIncorrect(LoginVO vo, Map<?,?> mapLockUserInfo) throws Exception{    	
+    public String processLoginIncorrect(LoginVO vo, Map<?,?> mapLockUserInfo) {    	
     	String sRtnCode = "C";
     	//KISA 보안약점 조치 (2018-10-29, 윤창원)
     	String enpassword = EgovFileScrty.encryptPassword(vo.getPassword(), EgovStringUtil.isNullToString(vo.getId()));
@@ -248,9 +248,9 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * 비밀번호를 수정한후 경과한 날짜를 조회한다.
 	 * @param vo LoginVO
 	 * @return int
-	 * @exception Exception
+	 * 
 	 */
-	public int selectPassedDayChangePWD(LoginVO vo) throws Exception {
+	public int selectPassedDayChangePWD(LoginVO vo)  {
 		return loginDAO.selectPassedDayChangePWD(vo);
 	}
 
@@ -258,10 +258,10 @@ public class EgovLoginServiceImpl extends EgovAbstractServiceImpl implements Ego
 	 * 디지털원패스 인증 회원 조회한다.
 	 * @param id
 	 * @return LoginVO
-	 * @exception Exception
+	 * 
 	 */
     @Override
-	public LoginVO onepassLogin(String id) throws Exception {
+	public LoginVO onepassLogin(String id)  {
     	LoginVO loginVO = loginDAO.onepassLogin(id);
     	return loginVO;
     }

@@ -41,9 +41,9 @@ public class EgovCmmUseServiceImpl extends EgovAbstractServiceImpl implements Eg
      *
      * @param vo
      * @return
-     * @throws Exception
+     * @
      */
-    public List<CmmnDetailCode> selectCmmCodeDetail(ComDefaultCodeVO vo) throws Exception {
+    public List<CmmnDetailCode> selectCmmCodeDetail(ComDefaultCodeVO vo)  {
     	return cmmUseDAO.selectCmmCodeDetail(vo);
     }
 
@@ -52,9 +52,9 @@ public class EgovCmmUseServiceImpl extends EgovAbstractServiceImpl implements Eg
      *
      * @param voList
      * @return
-     * @throws Exception
+     * @
      */
-    public Map<String, List<CmmnDetailCode>> selectCmmCodeDetails(List<ComDefaultCodeVO> voList) throws Exception {
+    public Map<String, List<CmmnDetailCode>> selectCmmCodeDetails(List<ComDefaultCodeVO> voList)  {
 		ComDefaultCodeVO vo;
 		Map<String, List<CmmnDetailCode>> map = new HashMap<String, List<CmmnDetailCode>>();
 
@@ -72,9 +72,9 @@ public class EgovCmmUseServiceImpl extends EgovAbstractServiceImpl implements Eg
      *
      * @param 조회조건정보 vo
      * @return 조직정보 List
-     * @throws Exception
+     * @
      */
-    public List<CmmnDetailCode> selectOgrnztIdDetail(ComDefaultCodeVO vo) throws Exception {
+    public List<CmmnDetailCode> selectOgrnztIdDetail(ComDefaultCodeVO vo)  {
     	return cmmUseDAO.selectOgrnztIdDetail(vo);
     }
 
@@ -83,9 +83,9 @@ public class EgovCmmUseServiceImpl extends EgovAbstractServiceImpl implements Eg
      *
      * @param 조회조건정보 vo
      * @return 그룹정보 List
-     * @throws Exception
+     * @
      */
-    public List<CmmnDetailCode> selectGroupIdDetail(ComDefaultCodeVO vo) throws Exception {
+    public List<CmmnDetailCode> selectGroupIdDetail(ComDefaultCodeVO vo)  {
     	return cmmUseDAO.selectGroupIdDetail(vo);
     }
 }

@@ -165,8 +165,9 @@ public class EgovLoginController {
 		model.addAttribute("authType", authType);
 
 		String message = request.getParameter(LOGIN_MESSAGE);
-		if (message != null)
+		if (message != null) {
 			model.addAttribute(LOGIN_MESSAGE, message);
+		}
 
 		return "egovframework/com/uat/uia/EgovLoginUsr";
 	}
@@ -307,8 +308,9 @@ public class EgovLoginController {
 		}
 		LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 
-		if (user.getIp().equals(""))
+		if (user.getIp().equals("")) {
 			user.setIp(EgovClntInfo.getClntIP(request));
+		}
 
 		// 221116 김혜준 2022 시큐어코딩 조치
 		LOGGER.debug("User Id : {}", EgovStringUtil.isNullToString(user.getId()));

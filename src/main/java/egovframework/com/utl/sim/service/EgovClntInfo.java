@@ -30,9 +30,9 @@ public class EgovClntInfo {
 	 * 클라이언트(Client)의 IP주소를 조회하는 기능
 	 * @param HttpServletRequest request Request객체
 	 * @return String ipAddr IP주소
-	 * @exception Exception
+	 * 
 	*/
-	public static String getClntIP(HttpServletRequest request) throws Exception {
+	public static String getClntIP(HttpServletRequest request)  {
 		
 		String ipAddr = null;
 		
@@ -72,9 +72,9 @@ public class EgovClntInfo {
 	 * 클라이언트(Client)의 OS 정보를 조회하는 기능
 	 * @param HttpServletRequest request Request객체
 	 * @return String osInfo OS 정보
-	 * @exception Exception
+	 * 
 	*/
-	public static String getClntOsInfo(HttpServletRequest request) throws Exception {
+	public static String getClntOsInfo(HttpServletRequest request)  {
 	
 		String user_agent = request.getHeader("user-agent");
 		String os_info = user_agent.toUpperCase().split(";")[2].split("\\)")[0];
@@ -92,9 +92,9 @@ public class EgovClntInfo {
 	 * 클라이언트(Client)의 웹브라우저 종류를 조회하는 기능
 	 * @param HttpServletRequest request Request객체
 	 * @return String webKind 웹브라우저 종류
-	 * @exception Exception
+	 * 
 	*/
-	public static String getClntWebKind(HttpServletRequest request) throws Exception {
+	public static String getClntWebKind(HttpServletRequest request)  {
 		
 		String user_agent = request.getHeader("user-agent");
 		
@@ -132,9 +132,9 @@ public class EgovClntInfo {
 	 * 클라이언트(Client)의 웹브라우저 버전을 조회하는 기능
 	 * @param HttpServletRequest request Request객체
 	 * @return String webVer 웹브라우저 버전
-	 * @exception Exception
+	 * 
 	*/
-	public static String getClntWebVer(HttpServletRequest request) throws Exception {
+	public static String getClntWebVer(HttpServletRequest request)  {
 		
 		String user_agent = request.getHeader("user-agent");
 		

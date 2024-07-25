@@ -143,7 +143,7 @@ public class EgovLoginController {
 		// 권한체크시 에러 페이지 이동
 		String auth_error = request.getParameter("auth_error") == null ? ""
 				: (String) request.getParameter("auth_error");
-		if (auth_error != null && auth_error.equals("1")) {
+		if (auth_error != null && "1".equals(auth_error)) {
 			return "egovframework/com/cmm/error/accessDenied";
 		}
 
@@ -191,11 +191,11 @@ public class EgovLoginController {
 			if (mapLockUserInfo != null) {
 				// 2.1 로그인인증제한 처리
 				String sLoginIncorrectCode = loginService.processLoginIncorrect(loginVO, mapLockUserInfo);
-				if (!sLoginIncorrectCode.equals("E")) {
-					if (sLoginIncorrectCode.equals("L")) {
+				if (!"E".equals(sLoginIncorrectCode)) {
+					if ("L".equals(sLoginIncorrectCode)) {
 						model.addAttribute(LOGIN_MESSAGE, egovMessageSource.getMessageArgs("fail.common.loginIncorrect",
 								new Object[] { egovLoginConfig.getLockCount(), request.getLocale() }));
-					} else if (sLoginIncorrectCode.equals("C")) {
+					} else if ("C".equals(sLoginIncorrectCode)) {
 						model.addAttribute(LOGIN_MESSAGE,
 								egovMessageSource.getMessage(FAIL_COMMON_LOGIN, request.getLocale()));
 					}
@@ -214,7 +214,7 @@ public class EgovLoginController {
 
 		// 3. 일반 로그인 처리
 		// 2022.11.11 시큐어코딩 처리
-		if (resultVO.getId() != null && !resultVO.getId().equals("")) {
+		if (resultVO.getId() != null && !"".equals(resultVO.getId())) {
 
 			// 3-1. 로그인 정보를 세션에 저장
 			session.setAttribute(LOGIN_VO, resultVO);
@@ -310,7 +310,7 @@ public class EgovLoginController {
 		}
 		LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 
-		if (user.getIp().equals("")) {
+		if ("".equals(user.getIp())) {
 			user.setIp(EgovClntInfo.getClntIP(request));
 		}
 
@@ -422,8 +422,8 @@ public class EgovLoginController {
 	@RequestMapping(value = "/uat/uia/searchId.do")
 	public String searchId(@ModelAttribute(LOGIN_VO) LoginVO loginVO, ModelMap model) {
 
-		if (loginVO == null || loginVO.getName() == null || loginVO.getName().equals("") && loginVO.getEmail() == null
-				|| loginVO.getEmail().equals("") && loginVO.getUserSe() == null || loginVO.getUserSe().equals("")) {
+		if (loginVO == null || loginVO.getName() == null || "".equals(loginVO.getName()) && loginVO.getEmail() == null
+				|| "".equals(loginVO.getEmail()) && loginVO.getUserSe() == null || "".equals(loginVO.getUserSe())) {
 			return "egovframework/com/cmm/egovError";
 		}
 
@@ -431,7 +431,7 @@ public class EgovLoginController {
 		loginVO.setName(loginVO.getName().replaceAll(" ", ""));
 		LoginVO resultVO = loginService.searchId(loginVO);
 
-		if (resultVO != null && resultVO.getId() != null && !resultVO.getId().equals("")) {
+		if (resultVO != null && resultVO.getId() != null && !"".equals(resultVO.getId())) {
 
 			model.addAttribute(RESULT_INFO, "아이디는 " + resultVO.getId() + " 입니다.");
 			return EGOV_ID_PASSWORD_RESULT;
@@ -452,9 +452,9 @@ public class EgovLoginController {
 	public String searchPassword(@ModelAttribute(LOGIN_VO) LoginVO loginVO, ModelMap model) {
 
 		// KISA 보안약점 조치 (2018-10-29, 윤창원)
-		if (loginVO == null || loginVO.getId() == null || loginVO.getId().equals("") && loginVO.getName() == null
+		if (loginVO == null || loginVO.getId() == null || "".equals(loginVO.getId()) && loginVO.getName() == null
 				|| "".equals(loginVO.getName()) && loginVO.getEmail() == null
-				|| loginVO.getEmail().equals("") && loginVO.getPasswordHint() == null
+				|| "".equals(loginVO.getEmail()) && loginVO.getPasswordHint() == null
 				|| "".equals(loginVO.getPasswordHint()) && loginVO.getPasswordCnsr() == null
 				|| "".equals(loginVO.getPasswordCnsr()) && loginVO.getUserSe() == null
 				|| "".equals(loginVO.getUserSe())) {

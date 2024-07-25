@@ -31,9 +31,9 @@ public class SndngMailRegistDAO extends EgovComAbstractDAO {
 	 * 발송할 메일을 등록한다
 	 * @param vo SndngMailVO
 	 * @return SndngMailVO
-	 * @exception Exception
+	 * 
 	 */
-	public SndngMailVO insertSndngMail(SndngMailVO vo) throws Exception {
+	public SndngMailVO insertSndngMail(SndngMailVO vo)  {
 		insert("sndngMailRegistDAO.insertSndngMail", vo);
 		return new SndngMailVO() ;
 	}
@@ -42,9 +42,9 @@ public class SndngMailRegistDAO extends EgovComAbstractDAO {
 	 * 발송할 메일에 있는 첨부파일 목록을 조회한다.
 	 * @param vo SndngMailVO
 	 * @return List
-	 * @exception Exception
+	 * 
 	 */
-	public List<AtchmnFileVO> selectAtchmnFileList(SndngMailVO vo) throws Exception {
+	public List<AtchmnFileVO> selectAtchmnFileList(SndngMailVO vo)  {
 		return selectList("sndngMailRegistDAO.selectAtchmnFileList", vo);
 	}
 
@@ -52,9 +52,9 @@ public class SndngMailRegistDAO extends EgovComAbstractDAO {
 	 * 발송결과를 수정한다.
 	 * @param vo SndngMailVO
 	 * @return SndngMailVO
-	 * @exception Exception
+	 * 
 	 */
-	public SndngMailVO updateSndngMail(SndngMailVO vo) throws Exception {
+	public SndngMailVO updateSndngMail(SndngMailVO vo)  {
 		update("sndngMailRegistDAO.updateSndngMail", vo);
 		return new SndngMailVO();
 	}

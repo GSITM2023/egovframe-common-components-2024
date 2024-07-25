@@ -46,13 +46,13 @@ public class ActionLoginLoginDAOTest extends EgovTestAbstractDAO {
 	@Test
 	public void actionLogin() throws Exception {
 		// given
-		LoginVO vo = new LoginVO();
+		final LoginVO vo = new LoginVO();
 		vo.setUserSe("USR");
 		vo.setId("TEST1");
 		vo.setPassword(EgovFileScrty.encryptPassword("rhdxhd12", vo.getId()));
 
 		// when
-		LoginVO result = loginDAO.actionLogin(vo);
+		final LoginVO result = loginDAO.actionLogin(vo);
 
 		if (log.isDebugEnabled()) {
 			log.debug("result={}", result);
@@ -62,7 +62,7 @@ public class ActionLoginLoginDAOTest extends EgovTestAbstractDAO {
 		}
 
 		// then
-		String message = egovMessageSource.getMessage(FAIL_COMMON_SELECT);
+		final String message = egovMessageSource.getMessage(FAIL_COMMON_SELECT);
 		assertEquals(message, vo.getUserSe(), result.getUserSe());
 		assertEquals(message, vo.getId(), result.getId());
 		assertEquals(message, vo.getPassword(), result.getPassword());

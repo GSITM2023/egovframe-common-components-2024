@@ -313,7 +313,9 @@ public class EgovLoginController {
 		}
 
 		// 221116 김혜준 2022 시큐어코딩 조치
-		LOGGER.debug("User Id : {}", EgovStringUtil.isNullToString(user.getId()));
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("User Id : {}", EgovStringUtil.isNullToString(user.getId()));
+		}
 
 //		/*
 //		 * // 2. 메뉴조회 MenuManageVO menuManageVO = new MenuManageVO();
@@ -330,8 +332,10 @@ public class EgovLoginController {
 		// 3. 메인 페이지 이동
 		String main_page = Globals.MAIN_PAGE;
 
-		LOGGER.debug("Globals.MAIN_PAGE > " + Globals.MAIN_PAGE);
-		LOGGER.debug("main_page > {}", main_page);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Globals.MAIN_PAGE > " + Globals.MAIN_PAGE);
+			LOGGER.debug("main_page > {}", main_page);
+		}
 
 		if (main_page.startsWith("/")) {
 			return "forward:" + main_page;
@@ -602,7 +606,9 @@ public class EgovLoginController {
 		try {
 			expirePwdDay = Integer.parseInt(propertyExpirePwdDay);
 		} catch (NumberFormatException e) {
-			LOGGER.debug("convert expirePwdDay Err : " + e.getMessage());
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("convert expirePwdDay Err : " + e.getMessage());
+			}
 		}
 
 		model.addAttribute("expirePwdDay", expirePwdDay);
@@ -612,12 +618,16 @@ public class EgovLoginController {
 		model.addAttribute(LOGIN_VO, loginVO);
 		int passedDayChangePWD = 0;
 		if (loginVO != null) {
-			LOGGER.debug("===>>> loginVO.getId() = " + loginVO.getId());
-			LOGGER.debug("===>>> loginVO.getUniqId() = " + loginVO.getUniqId());
-			LOGGER.debug("===>>> loginVO.getUserSe() = " + loginVO.getUserSe());
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("===>>> loginVO.getId() = " + loginVO.getId());
+				LOGGER.debug("===>>> loginVO.getUniqId() = " + loginVO.getUniqId());
+				LOGGER.debug("===>>> loginVO.getUserSe() = " + loginVO.getUserSe());
+			}
 			// 비밀번호 변경후 경과한 일수
 			passedDayChangePWD = loginService.selectPassedDayChangePWD(loginVO);
-			LOGGER.debug("===>>> passedDayChangePWD = " + passedDayChangePWD);
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("===>>> passedDayChangePWD = " + passedDayChangePWD);
+			}
 			model.addAttribute("passedDay", passedDayChangePWD);
 		}
 

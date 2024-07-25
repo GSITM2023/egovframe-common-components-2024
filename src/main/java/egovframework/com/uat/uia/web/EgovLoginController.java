@@ -141,9 +141,9 @@ public class EgovLoginController {
 		}
 
 		// 권한체크시 에러 페이지 이동
-		final String auth_error = request.getParameter("auth_error") == null ? ""
+		final String authError = request.getParameter("auth_error") == null ? ""
 				: (String) request.getParameter("auth_error");
-		if (auth_error != null && "1".equals(auth_error)) {
+		if (authError != null && "1".equals(authError)) {
 			return "egovframework/com/cmm/error/accessDenied";
 		}
 
@@ -332,17 +332,17 @@ public class EgovLoginController {
 //		 */
 
 		// 3. 메인 페이지 이동
-		final String main_page = Globals.MAIN_PAGE;
+		final String mainPage = Globals.MAIN_PAGE;
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Globals.MAIN_PAGE > " + Globals.MAIN_PAGE);
-			LOGGER.debug("main_page > {}", main_page);
+			LOGGER.debug("main_page > {}", mainPage);
 		}
 
-		if (main_page.startsWith("/")) {
-			return "forward:" + main_page;
+		if (mainPage.startsWith("/")) {
+			return "forward:" + mainPage;
 		} else {
-			return main_page;
+			return mainPage;
 		}
 
 //		/*

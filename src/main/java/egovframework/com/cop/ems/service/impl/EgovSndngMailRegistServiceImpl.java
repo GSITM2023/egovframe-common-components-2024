@@ -14,6 +14,8 @@ import egovframework.com.utl.fcc.service.EgovStringUtil;
 import egovframework.com.utl.sim.service.EgovXMLDoc;
 
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
+import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
+import org.egovframe.rte.fdl.cmmn.exception.FdlException;
 import org.egovframe.rte.fdl.idgnr.EgovIdGnrService;
 
 import javax.annotation.Resource;
@@ -72,7 +74,12 @@ public class EgovSndngMailRegistServiceImpl extends EgovAbstractServiceImpl impl
 		for (int j = 0; j < recptnPersonList.length; j++) {
 
 			// 1-0.메세지ID를 생성한다.
-			String mssageId = egovMailMsgIdGnrService.getNextStringId();
+			String mssageId;
+			try {
+				mssageId = egovMailMsgIdGnrService.getNextStringId();
+			} catch (FdlException e) {
+				throw new BaseRuntimeException(e);
+			}
 
 			// 1-1.발송메일  데이터를 만든다.
 			SndngMailVO mailVO = new SndngMailVO();

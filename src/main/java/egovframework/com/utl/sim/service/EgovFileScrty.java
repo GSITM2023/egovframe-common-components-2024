@@ -21,12 +21,16 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
+import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 
 import egovframework.com.cmm.EgovWebUtil;
 import egovframework.com.cmm.service.EgovProperties;
@@ -89,6 +93,8 @@ public class EgovFileScrty {
 				}
 				result = true;
 			}
+		} catch (IOException e) {
+			throw new BaseRuntimeException(e);
 		} finally {
 			EgovResourceCloseHelper.close(input, output);
 		}
@@ -130,6 +136,8 @@ public class EgovFileScrty {
 	
 			result = true;
 		    }
+		} catch (IOException e) {
+			throw new BaseRuntimeException(e);
 		} finally {
 			EgovResourceCloseHelper.close(input, output);
 		}
@@ -202,7 +210,12 @@ public class EgovFileScrty {
 		
 		byte[] hashValue = null; // 해쉬값
 	
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			throw new BaseRuntimeException(e);
+		}
 		
 		md.reset();
 		md.update(id.getBytes());
@@ -227,7 +240,12 @@ public class EgovFileScrty {
 	
 		byte[] hashValue = null; // 해쉬값
 	
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			throw new BaseRuntimeException(e);
+		}
 		
 		md.reset();
 		md.update(salt);
@@ -248,7 +266,12 @@ public class EgovFileScrty {
     public static boolean checkPassword(String data, String encoded, byte[] salt)  {
     	byte[] hashValue = null; // 해쉬값
     	
-    	MessageDigest md = MessageDigest.getInstance("SHA-256");
+    	MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			throw new BaseRuntimeException(e);
+		}
     	
     	md.reset();
     	md.update(salt);

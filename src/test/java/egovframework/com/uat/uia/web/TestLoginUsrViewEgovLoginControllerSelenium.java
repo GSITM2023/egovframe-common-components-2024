@@ -1,5 +1,7 @@
 package egovframework.com.uat.uia.web;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -41,6 +43,11 @@ public class TestLoginUsrViewEgovLoginControllerSelenium {
 
 		// 로그인 버튼 클릭
 		executor.executeScript("actionLogin();");
+
+		// 확인
+		WebElement a = driver.findElement(By.tagName("a"));
+		String aString = a.getText();
+		assertEquals("", "로그아웃", aString);
 	}
 
 }

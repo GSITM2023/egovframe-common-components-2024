@@ -1,5 +1,7 @@
 package egovframework.com.uat.uia.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.test.EgovTestAbstractDAO;
+import egovframework.com.utl.sim.service.EgovFileScrty;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,16 +48,22 @@ public class ActionLoginLoginDAOTest extends EgovTestAbstractDAO {
 		// given
 		LoginVO vo = new LoginVO();
 		vo.setUserSe("USR");
+		vo.setId("TEST1");
+		vo.setPassword(EgovFileScrty.encryptPassword("rhdxhd12", vo.getId()));
 
 		// when
 		LoginVO result = loginDAO.actionLogin(vo);
 
 		log.debug("result={}", result);
-//		log.debug("getDeptId={}, {}", testDataDeptJobBx.getDeptJobBxId(), result.getDeptJobId());
+		log.debug("getUserSe={}, {}", vo.getUserSe(), result.getUserSe());
+		log.debug("getId={}, {}", vo.getId(), result.getId());
+		log.debug("getPassword={}, {}", vo.getPassword(), result.getPassword());
 
 		// then
-//		assertEquals(egovMessageSource.getMessage(FAIL_COMMON_SELECT), testDataDeptJob.getDeptJobId(),
-//				result.getDeptJobId());
+		String message = egovMessageSource.getMessage(FAIL_COMMON_SELECT);
+		assertEquals(message, vo.getUserSe(), result.getUserSe());
+		assertEquals(message, vo.getId(), result.getId());
+		assertEquals(message, vo.getPassword(), result.getPassword());
 	}
 
 }

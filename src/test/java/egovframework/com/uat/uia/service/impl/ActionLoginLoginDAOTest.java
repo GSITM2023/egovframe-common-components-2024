@@ -54,10 +54,12 @@ public class ActionLoginLoginDAOTest extends EgovTestAbstractDAO {
 		// when
 		LoginVO result = loginDAO.actionLogin(vo);
 
-		log.debug("result={}", result);
-		log.debug("getUserSe={}, {}", vo.getUserSe(), result.getUserSe());
-		log.debug("getId={}, {}", vo.getId(), result.getId());
-		log.debug("getPassword={}, {}", vo.getPassword(), result.getPassword());
+		if (log.isDebugEnabled()) {
+			log.debug("result={}", result);
+			log.debug("getUserSe={}, {}", vo.getUserSe(), result.getUserSe());
+			log.debug("getId={}, {}", vo.getId(), result.getId());
+			log.debug("getPassword={}, {}", vo.getPassword(), result.getPassword());
+		}
 
 		// then
 		String message = egovMessageSource.getMessage(FAIL_COMMON_SELECT);

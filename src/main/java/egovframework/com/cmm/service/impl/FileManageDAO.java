@@ -3,19 +3,22 @@ package egovframework.com.cmm.service.impl;
 import java.util.Iterator;
 import java.util.List;
 
-import egovframework.com.cmm.service.FileVO;
-
 import org.springframework.stereotype.Repository;
+
+import egovframework.com.cmm.service.FileVO;
 
 /**
  * @Class Name : EgovFileMngDAO.java
  * @Description : 파일정보 관리를 위한 데이터 처리 클래스
  * @Modification Information
- *
+ * 
+ *               <pre>
  *    수정일       수정자         수정내용
  *    -------        -------     -------------------
  *    2009. 3. 25.     이삼섭    최초생성
- *
+ *   2024.07.25  이백행          시큐어코딩 Exception 제거
+ *               </pre>
+ * 
  * @author 공통 서비스 개발팀 이삼섭
  * @since 2009. 3. 25.
  * @version
@@ -29,10 +32,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 여러 개의 파일에 대한 정보(속성 및 상세)를 등록한다.
 	 *
 	 * @param fileList
-	 * @return
-	 * @
+	 * @return @
 	 */
-	public String insertFileInfs(List<FileVO> fileList)  {
+	public String insertFileInfs(List<FileVO> fileList) {
 		FileVO vo = fileList.get(0);
 		String atchFileId = vo.getAtchFileId();
 
@@ -51,10 +53,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	/**
 	 * 하나의 파일에 대한 정보(속성 및 상세)를 등록한다.
 	 *
-	 * @param vo
-	 * @
+	 * @param vo @
 	 */
-	public void insertFileInf(FileVO vo)  {
+	public void insertFileInf(FileVO vo) {
 		insert("FileManageDAO.insertFileMaster", vo);
 		insert("FileManageDAO.insertFileDetail", vo);
 	}
@@ -62,10 +63,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	/**
 	 * 여러 개의 파일에 대한 정보(속성 및 상세)를 수정한다.
 	 *
-	 * @param fileList
-	 * @
+	 * @param fileList @
 	 */
-	public void updateFileInfs(List<FileVO> fileList)  {
+	public void updateFileInfs(List<FileVO> fileList) {
 		FileVO vo;
 		Iterator<FileVO> iter = fileList.iterator();
 		while (iter.hasNext()) {
@@ -77,10 +77,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	/**
 	 * 여러 개의 파일을 삭제한다.
 	 *
-	 * @param fileList
-	 * @
+	 * @param fileList @
 	 */
-	public void deleteFileInfs(List<FileVO> fileList)  {
+	public void deleteFileInfs(List<FileVO> fileList) {
 		Iterator<FileVO> iter = fileList.iterator();
 		FileVO vo;
 		while (iter.hasNext()) {
@@ -93,10 +92,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	/**
 	 * 하나의 파일을 삭제한다.
 	 *
-	 * @param fvo
-	 * @
+	 * @param fvo @
 	 */
-	public void deleteFileInf(FileVO fvo)  {
+	public void deleteFileInf(FileVO fvo) {
 		delete("FileManageDAO.deleteFileDetail", fvo);
 	}
 
@@ -104,10 +102,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 파일에 대한 목록을 조회한다.
 	 *
 	 * @param vo
-	 * @return
-	 * @
+	 * @return @
 	 */
-	public List<FileVO> selectFileInfs(FileVO vo)  {
+	public List<FileVO> selectFileInfs(FileVO vo) {
 		return selectList("FileManageDAO.selectFileList", vo);
 	}
 
@@ -115,10 +112,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 파일 구분자에 대한 최대값을 구한다.
 	 *
 	 * @param fvo
-	 * @return
-	 * @
+	 * @return @
 	 */
-	public int getMaxFileSN(FileVO fvo)  {
+	public int getMaxFileSN(FileVO fvo) {
 		return (Integer) selectOne("FileManageDAO.getMaxFileSN", fvo);
 	}
 
@@ -126,20 +122,18 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 파일에 대한 상세정보를 조회한다.
 	 *
 	 * @param fvo
-	 * @return
-	 * @
+	 * @return @
 	 */
-	public FileVO selectFileInf(FileVO fvo)  {
+	public FileVO selectFileInf(FileVO fvo) {
 		return (FileVO) selectOne("FileManageDAO.selectFileInf", fvo);
 	}
 
 	/**
 	 * 전체 파일을 삭제한다.
 	 *
-	 * @param fvo
-	 * @
+	 * @param fvo @
 	 */
-	public void deleteAllFileInf(FileVO fvo)  {
+	public void deleteAllFileInf(FileVO fvo) {
 		update("FileManageDAO.deleteCOMTNFILE", fvo);
 	}
 
@@ -147,10 +141,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 파일명 검색에 대한 목록을 조회한다.
 	 *
 	 * @param vo
-	 * @return
-	 * @
+	 * @return @
 	 */
-	public List<FileVO> selectFileListByFileNm(FileVO fvo)  {
+	public List<FileVO> selectFileListByFileNm(FileVO fvo) {
 		return selectList("FileManageDAO.selectFileListByFileNm", fvo);
 	}
 
@@ -158,10 +151,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 파일명 검색에 대한 목록 전체 건수를 조회한다.
 	 *
 	 * @param fvo
-	 * @return
-	 * @
+	 * @return @
 	 */
-	public int selectFileListCntByFileNm(FileVO fvo)  {
+	public int selectFileListCntByFileNm(FileVO fvo) {
 		return (Integer) selectOne("FileManageDAO.selectFileListCntByFileNm", fvo);
 	}
 
@@ -169,10 +161,9 @@ public class FileManageDAO extends EgovComAbstractDAO {
 	 * 이미지 파일에 대한 목록을 조회한다.
 	 *
 	 * @param vo
-	 * @return
-	 * @
+	 * @return @
 	 */
-	public List<FileVO> selectImageFileList(FileVO vo)  {
+	public List<FileVO> selectImageFileList(FileVO vo) {
 		return selectList("FileManageDAO.selectImageFileList", vo);
 	}
 }

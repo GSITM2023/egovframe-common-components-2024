@@ -10,12 +10,13 @@ import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 
 /**
  * 발송메일에 첨부파일용으로 사용되는 VO 클래스
+ * 
  * @author 공통서비스 개발팀 이기하
  * @since 2011.12.06
  * @version 1.0
  * @see
  *
- * <pre>
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *    수정일      	수정자          수정내용
@@ -23,8 +24,9 @@ import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
  *  2011.12.06		이기하          최초 생성
  *  2013.05.23		이기하          thread-safe 하게 변경
  *  2022.11.11      김혜준          시큐어코딩 처리
+ *   2024.07.25  이백행          시큐어코딩 Exception 제거
  *
- *  </pre>
+ *      </pre>
  */
 
 public class EgovMultiPartEmail implements Serializable {
@@ -86,7 +88,7 @@ public class EgovMultiPartEmail implements Serializable {
 	}
 
 	@Deprecated
-	public String send()  {
+	public String send() {
 		MultiPartEmail email = new MultiPartEmail();
 
 		email.setCharset("UTF-8");
@@ -107,11 +109,11 @@ public class EgovMultiPartEmail implements Serializable {
 		}
 	}
 
-	public String send(String addTo, String subject, String msg)  {
+	public String send(String addTo, String subject, String msg) {
 		return send(addTo, subject, msg, null);
 	}
 
-	public String send(String addTo, String subject, String msg, EmailAttachment attachment)  {
+	public String send(String addTo, String subject, String msg, EmailAttachment attachment) {
 		MultiPartEmail email = new MultiPartEmail();
 
 		email.setCharset("UTF-8");

@@ -15,8 +15,8 @@ import egovframework.com.cmm.LoginVO;
  * @since 2009.03.06
  * @version 1.0
  * @see
- *  
- * <pre>
+ * 
+ *      <pre>
  * << 개정이력(Modification Information) >>
  * 
  *  수정일               수정자            수정내용
@@ -26,82 +26,90 @@ import egovframework.com.cmm.LoginVO;
  *  2017.07.21   장동한            로그인인증제한 작업
  *  2020.07.08   신용호            비밀번호를 수정한후 경과한 날짜 조회
  *  2021.05.30   정진오            디지털원패스 인증 회원 조회
- *  </pre>
+ *   2024.07.25  이백행          시큐어코딩 Exception 제거
+ *      </pre>
  */
 public interface EgovLoginService {
-	
+
 	/**
-     * 2011.08.26
-	 * EsntlId를 이용한 로그인을 처리한다
+	 * 2011.08.26 EsntlId를 이용한 로그인을 처리한다
+	 * 
 	 * @param vo LoginVO
 	 * @return LoginVO
 	 * 
 	 */
-    public LoginVO actionLoginByEsntlId(LoginVO vo) ;
-	
+	public LoginVO actionLoginByEsntlId(LoginVO vo);
+
 	/**
 	 * 일반 로그인을 처리한다
+	 * 
 	 * @param vo LoginVO
 	 * @return LoginVO
 	 * 
 	 */
-    LoginVO actionLogin(LoginVO vo) ;
-    
-    /**
+	LoginVO actionLogin(LoginVO vo);
+
+	/**
 	 * 인증서 로그인을 처리한다
+	 * 
 	 * @param vo LoginVO
 	 * @return LoginVO
 	 * 
 	 */
-    LoginVO actionCrtfctLogin(LoginVO vo) ;
-    
-    /**
+	LoginVO actionCrtfctLogin(LoginVO vo);
+
+	/**
 	 * 아이디를 찾는다.
+	 * 
 	 * @param vo LoginVO
 	 * @return LoginVO
 	 * 
 	 */
-    LoginVO searchId(LoginVO vo) ;
-    
-    /**
+	LoginVO searchId(LoginVO vo);
+
+	/**
 	 * 비밀번호를 찾는다.
+	 * 
 	 * @param vo LoginVO
 	 * @return boolean
 	 * 
 	 */
-    boolean searchPassword(LoginVO vo) ;
-    
-    
-    /**
+	boolean searchPassword(LoginVO vo);
+
+	/**
 	 * 로그인인증제한을 처리한다.
-	 * @param vo LoginVO
+	 * 
+	 * @param vo  LoginVO
 	 * @param Map mapLockUserInfo
 	 * @return String
 	 * 
 	 */
-    String processLoginIncorrect(LoginVO vo, Map<?,?> mapLockUserInfo) ;
-    
-    /**
+	String processLoginIncorrect(LoginVO vo, Map<?, ?> mapLockUserInfo);
+
+	/**
 	 * 로그인인증제한을 조회한다.
+	 * 
 	 * @param vo LoginVO
 	 * @return Map
 	 * 
 	 */
-    Map<?,?> selectLoginIncorrect(LoginVO vo) ;
+	Map<?, ?> selectLoginIncorrect(LoginVO vo);
 
-    /**
+	/**
 	 * 비밀번호를 수정한후 경과한 날짜를 조회한다.
+	 * 
 	 * @param vo LoginVO
 	 * @return int
 	 * 
-	 */    
-    int selectPassedDayChangePWD(LoginVO vo) ;
+	 */
+	int selectPassedDayChangePWD(LoginVO vo);
 
 	/**
 	 * 디지털원패스 인증 회원 조회한다.
+	 * 
 	 * @param id
 	 * @return LoginVO
 	 * 
 	 */
-    LoginVO onepassLogin(String id) ;
+	LoginVO onepassLogin(String id);
 }

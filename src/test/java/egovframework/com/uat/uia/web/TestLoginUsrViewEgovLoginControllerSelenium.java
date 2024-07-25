@@ -12,16 +12,31 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author god
+ *
+ */
 @NoArgsConstructor
 public class TestLoginUsrViewEgovLoginControllerSelenium {
 
+	/**
+	 * 
+	 */
 	WebDriver driver;
 
+	/**
+	 * 
+	 */
 	@Before
 	public void setup() {
 		driver = new ChromeDriver();
 	}
 
+	/**
+	 * 
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void test() throws InterruptedException {
 		// 로그인 화면 이동

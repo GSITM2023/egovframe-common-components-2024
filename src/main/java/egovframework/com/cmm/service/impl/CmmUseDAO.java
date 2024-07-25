@@ -30,9 +30,9 @@ public class CmmUseDAO extends EgovComAbstractDAO {
      * 
      * @param vo
      * @return
-     * @throws Exception
+     * @
      */
-    public List<CmmnDetailCode> selectCmmCodeDetail(ComDefaultCodeVO vo) throws Exception {
+    public List<CmmnDetailCode> selectCmmCodeDetail(ComDefaultCodeVO vo)  {
 	return selectList("CmmUseDAO.selectCmmCodeDetail", vo);
     }
 
@@ -41,9 +41,9 @@ public class CmmUseDAO extends EgovComAbstractDAO {
      * 
      * @param vo
      * @return
-     * @throws Exception
+     * @
      */
-    public List<CmmnDetailCode> selectOgrnztIdDetail(ComDefaultCodeVO vo) throws Exception {
+    public List<CmmnDetailCode> selectOgrnztIdDetail(ComDefaultCodeVO vo)  {
 	return selectList("CmmUseDAO.selectOgrnztIdDetail", vo);
     }
 
@@ -51,9 +51,9 @@ public class CmmUseDAO extends EgovComAbstractDAO {
      * 공통코드로 사용할그룹정보를 를 불러온다.
      * @param vo
      * @return
-     * @throws Exception
+     * @
      */
-    public List<CmmnDetailCode> selectGroupIdDetail(ComDefaultCodeVO vo) throws Exception {
+    public List<CmmnDetailCode> selectGroupIdDetail(ComDefaultCodeVO vo)  {
 	return selectList("CmmUseDAO.selectGroupIdDetail", vo);
     }
 }

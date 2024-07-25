@@ -19,26 +19,33 @@ package egovframework.com.utl.sim.service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
+import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.cmm.util.EgovResourceCloseHelper;
@@ -59,7 +66,7 @@ public class EgovXMLDoc {
 	 * @param file XML파일
 	 * @return SndngMailDocument mailDoc 메일발송 클래스(XML스키마를 통해 생성된 자바클래스)
 	 */
-	public static SndngMailDocument getXMLToClass(String file) throws Exception {
+	public static SndngMailDocument getXMLToClass(String file)  {
 		FileInputStream fis = null;
 		SndngMailDocument mailDoc = null;
 
@@ -71,6 +78,8 @@ public class EgovXMLDoc {
 				mailDoc = (SndngMailDocument) SndngMailDocument.Factory.parse(xmlFile);
 
 			}
+		} catch (IOException | XmlException e) {
+			throw new BaseRuntimeException(e);
 		} finally {
 			EgovResourceCloseHelper.close(fis);
 		}
@@ -84,7 +93,7 @@ public class EgovXMLDoc {
 	 * @param file 저장될 파일
 	 * @return boolean 저장여부 True / False
 	 */
-	public static boolean getClassToXML(SndngMailDocument mailDoc, String file) throws Exception {
+	public static boolean getClassToXML(SndngMailDocument mailDoc, String file)  {
 		boolean result = false;
 
 		FileOutputStream fos = null;
@@ -103,6 +112,8 @@ public class EgovXMLDoc {
 			fos.write(xmlStr.getBytes(StandardCharsets.UTF_8));
 			result = true;
 
+		} catch (IOException e) {
+			throw new BaseRuntimeException(e);
 		} finally {
 			EgovResourceCloseHelper.close(fos);
 		}
@@ -115,7 +126,7 @@ public class EgovXMLDoc {
 	 * @param xml XML파일
 	 * @return Document document 문서객체
 	 */
-	public static Document getXMLDocument(String xml) throws Exception {
+	public static Document getXMLDocument(String xml)  {
 		Document xmlDoc = null;
 		FileInputStream fis = null;
 		String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
@@ -136,6 +147,8 @@ public class EgovXMLDoc {
 				builder = factory.newDocumentBuilder();
 				xmlDoc = builder.parse(fis);
 			}
+		} catch (IOException | ParserConfigurationException | SAXException e) {
+			throw new BaseRuntimeException(e);
 		} finally {
 			EgovResourceCloseHelper.close(fis);
 		}
@@ -148,7 +161,7 @@ public class EgovXMLDoc {
 	 * @param document XML데이터
 	 * @return Element root 루트
 	 */
-	public static Element getRootElement(Document document) throws Exception {
+	public static Element getRootElement(Document document)  {
 		return document.getDocumentElement();
 	}
 
@@ -159,7 +172,7 @@ public class EgovXMLDoc {
 	 * @param id 생성될 Element의 ID
 	 * @return Element element 추가된 Element
 	 */
-	public static Element insertElement(Document document, Element rt, String id) throws Exception {
+	public static Element insertElement(Document document, Element rt, String id)  {
 		Element child;
 		Element root;
 
@@ -182,7 +195,7 @@ public class EgovXMLDoc {
 	 * @param text Element 하위에 들어갈 문자열
 	 * @return Element element 추가된 Element
 	 */
-	public static Element insertElement(Document document, Element rt, String id, String text) throws Exception {
+	public static Element insertElement(Document document, Element rt, String id, String text)  {
 		Element echild;
 		Text tchild;
 		Element root;
@@ -207,7 +220,7 @@ public class EgovXMLDoc {
 	 * @param text Element 하위에 들어갈 문자열
 	 * @return Element element 추가된 Element
 	 */
-	public static Text insertText(Document document, Element rt, String text) throws Exception {
+	public static Text insertText(Document document, Element rt, String text)  {
 		Text tchild;
 		Element root;
 
@@ -227,7 +240,7 @@ public class EgovXMLDoc {
 	 * @param current 현재노드
 	 * @return Element parent 상위노드
 	 */
-	public static Element getParentNode(Element current) throws Exception {
+	public static Element getParentNode(Element current)  {
 		Node parent = current.getParentNode();
 		return (Element) parent;
 	}
@@ -238,7 +251,7 @@ public class EgovXMLDoc {
 	 * @param file 저장될 파일
 	 * @return boolean 저장여부 True / False
 	 */
-	public static boolean getXMLFile(Document document, String file) throws Exception {
+	public static boolean getXMLFile(Document document, String file)  {
 		boolean retVal = false;
 		String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
 
@@ -247,14 +260,18 @@ public class EgovXMLDoc {
 			Source source = new DOMSource(document);
 			Result result = new StreamResult(srcFile);
 			TransformerFactory factory = TransformerFactory.newInstance();
-			factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-			factory.setAttribute(ACCESS_EXTERNAL_DTD, "");
-			factory.setAttribute(ACCESS_EXTERNAL_STYLESHEET, "");
-			Transformer transformer = factory.newTransformer();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(source, result);
+			try {
+				factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+				factory.setAttribute(ACCESS_EXTERNAL_DTD, "");
+				factory.setAttribute(ACCESS_EXTERNAL_STYLESHEET, "");
+				Transformer transformer = factory.newTransformer();
+				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+				transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+				transformer.transform(source, result);
+			} catch (IllegalArgumentException | TransformerException e) {
+				throw new BaseRuntimeException(e);
+			}
 		}
 
 		return retVal;

@@ -393,9 +393,9 @@ public class EgovLoginController {
 	public String idPasswordSearchView(final Model model) {
 
 		// 1. 비밀번호 힌트 공통코드 조회
-		final ComDefaultCodeVO vo = new ComDefaultCodeVO();
-		vo.setCodeId("COM022");
-		final List<CmmnDetailCode> code = cmmUseService.selectCmmCodeDetail(vo);
+		final ComDefaultCodeVO comDefaultCodeVO = new ComDefaultCodeVO();
+		comDefaultCodeVO.setCodeId("COM022");
+		final List<CmmnDetailCode> code = cmmUseService.selectCmmCodeDetail(comDefaultCodeVO);
 		model.addAttribute("pwhtCdList", code);
 
 		return "egovframework/com/uat/uia/EgovIdPasswordSearch";
@@ -506,8 +506,8 @@ public class EgovLoginController {
 
 		/** GPKI 인증 부분 */
 		// OS에 따라 (local NT(로컬) / server Unix(서버)) 구분
-		final String os = System.getProperty("os.arch");
-		LOGGER.debug("OS : {}", os);
+		final String osArch = System.getProperty("os.arch");
+		LOGGER.debug("OS : {}", osArch);
 
 		// String virusReturn = null;
 
@@ -543,12 +543,12 @@ public class EgovLoginController {
 
 		/** GPKI 인증 부분 */
 		// OS에 따라 (local NT(로컬) / server Unix(서버)) 구분
-		final String os = System.getProperty("os.arch");
-		LOGGER.debug("OS : {}", os);
+		final String osArch = System.getProperty("os.arch");
+		LOGGER.debug("OS : {}", osArch);
 
 		// String virusReturn = null;
 		@SuppressWarnings("unused")
-		String dn = "";
+		String subjectDN = "";
 
 		// 브라우저 이름을 받기위한 처리
 		final String browser = EgovClntInfo.getClntWebKind(request);

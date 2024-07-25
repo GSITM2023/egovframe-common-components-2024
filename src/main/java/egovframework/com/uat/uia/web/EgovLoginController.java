@@ -146,19 +146,19 @@ public class EgovLoginController {
 			return "egovframework/com/cmm/error/accessDenied";
 		}
 
-		/*
-		 * GPKIHttpServletResponse gpkiresponse = null; GPKIHttpServletRequest
-		 * gpkirequest = null;
-		 * 
-		 * try{
-		 * 
-		 * gpkiresponse=new GPKIHttpServletResponse(response); gpkirequest= new
-		 * GPKIHttpServletRequest(request); gpkiresponse.setRequest(gpkirequest);
-		 * model.addAttribute("challenge", gpkiresponse.getChallenge()); return
-		 * "egovframework/com/uat/uia/EgovLoginUsr";
-		 * 
-		 * }catch(Exception e){ return "egovframework/com/cmm/egovError"; }
-		 */
+//		/*
+//		 * GPKIHttpServletResponse gpkiresponse = null; GPKIHttpServletRequest
+//		 * gpkirequest = null;
+//		 * 
+//		 * try{
+//		 * 
+//		 * gpkiresponse=new GPKIHttpServletResponse(response); gpkirequest= new
+//		 * GPKIHttpServletRequest(request); gpkiresponse.setRequest(gpkirequest);
+//		 * model.addAttribute("challenge", gpkiresponse.getChallenge()); return
+//		 * "egovframework/com/uat/uia/EgovLoginUsr";
+//		 * 
+//		 * }catch(Exception e){ return "egovframework/com/cmm/egovError"; }
+//		 */
 
 		// 2021.05.30, 정진오, 디지털원패스 처리하기 위해 로그인 화면에 인증방식 전달
 		String authType = EgovProperties.getProperty("Globals.Auth").trim();
@@ -242,50 +242,50 @@ public class EgovLoginController {
 		loginVO.setIp(userIp);
 		LOGGER.debug("User IP : {}", userIp);
 
-		/*
-		 * // 1. GPKI 인증 GPKIHttpServletResponse gpkiresponse = null;
-		 * GPKIHttpServletRequest gpkirequest = null; String dn = ""; try{ gpkiresponse
-		 * = new GPKIHttpServletResponse(response); gpkirequest = new
-		 * GPKIHttpServletRequest(request); gpkiresponse.setRequest(gpkirequest);
-		 * X509Certificate cert = null;
-		 * 
-		 * byte[] signData = null; byte[] privatekey_random = null; String signType =
-		 * ""; String queryString = "";
-		 * 
-		 * cert = gpkirequest.getSignerCert(); dn = cert.getSubjectDN();
-		 * 
-		 * java.math.BigInteger b = cert.getSerialNumber(); b.toString(); int
-		 * message_type = gpkirequest.getRequestMessageType(); if( message_type ==
-		 * gpkirequest.ENCRYPTED_SIGNDATA || message_type ==
-		 * gpkirequest.LOGIN_ENVELOP_SIGN_DATA || message_type ==
-		 * gpkirequest.ENVELOP_SIGNDATA || message_type == gpkirequest.SIGNED_DATA){
-		 * signData = gpkirequest.getSignedData(); if(privatekey_random != null) {
-		 * privatekey_random = gpkirequest.getSignerRValue(); } signType =
-		 * gpkirequest.getSignType(); } queryString = gpkirequest.getQueryString();
-		 * }catch(Exception e){ return "cmm/egovError"; }
-		 * 
-		 * // 2. 업무사용자 테이블에서 dn값으로 사용자의 ID, PW를 조회하여 이를 일반로그인 형태로 인증하도록 함 if (dn != null
-		 * && !dn.equals("")) {
-		 * 
-		 * loginVO.setDn(dn); LoginVO resultVO =
-		 * loginService.actionCrtfctLogin(loginVO); if (resultVO != null &&
-		 * resultVO.getId() != null && !resultVO.getId().equals("")) {
-		 * 
-		 * //스프링 시큐리티패키지를 사용하는지 체크하는 로직
-		 * if(EgovComponentChecker.hasComponent("egovAuthorManageService")){ // 3-1.
-		 * spring security 연동 return "redirect:/j_spring_security_check?j_username=" +
-		 * resultVO.getUserSe() + resultVO.getId() + "&j_password=" +
-		 * resultVO.getUniqId();
-		 * 
-		 * }else{ // 3-2. 로그인 정보를 세션에 저장 request.getSession().setAttribute(LOGIN_VO,
-		 * resultVO); return "redirect:/uat/uia/actionMain.do"; }
-		 * 
-		 * 
-		 * } else { model.addAttribute("message",
-		 * egovMessageSource.getMessage(FAIL_COMMON_LOGIN)); return EGOV_LOGIN_USR; } }
-		 * else { model.addAttribute("message",
-		 * egovMessageSource.getMessage(FAIL_COMMON_LOGIN)); return EGOV_LOGIN_USR; }
-		 */
+//		/*
+//		 * // 1. GPKI 인증 GPKIHttpServletResponse gpkiresponse = null;
+//		 * GPKIHttpServletRequest gpkirequest = null; String dn = ""; try{ gpkiresponse
+//		 * = new GPKIHttpServletResponse(response); gpkirequest = new
+//		 * GPKIHttpServletRequest(request); gpkiresponse.setRequest(gpkirequest);
+//		 * X509Certificate cert = null;
+//		 * 
+//		 * byte[] signData = null; byte[] privatekey_random = null; String signType =
+//		 * ""; String queryString = "";
+//		 * 
+//		 * cert = gpkirequest.getSignerCert(); dn = cert.getSubjectDN();
+//		 * 
+//		 * java.math.BigInteger b = cert.getSerialNumber(); b.toString(); int
+//		 * message_type = gpkirequest.getRequestMessageType(); if( message_type ==
+//		 * gpkirequest.ENCRYPTED_SIGNDATA || message_type ==
+//		 * gpkirequest.LOGIN_ENVELOP_SIGN_DATA || message_type ==
+//		 * gpkirequest.ENVELOP_SIGNDATA || message_type == gpkirequest.SIGNED_DATA){
+//		 * signData = gpkirequest.getSignedData(); if(privatekey_random != null) {
+//		 * privatekey_random = gpkirequest.getSignerRValue(); } signType =
+//		 * gpkirequest.getSignType(); } queryString = gpkirequest.getQueryString();
+//		 * }catch(Exception e){ return "cmm/egovError"; }
+//		 * 
+//		 * // 2. 업무사용자 테이블에서 dn값으로 사용자의 ID, PW를 조회하여 이를 일반로그인 형태로 인증하도록 함 if (dn != null
+//		 * && !dn.equals("")) {
+//		 * 
+//		 * loginVO.setDn(dn); LoginVO resultVO =
+//		 * loginService.actionCrtfctLogin(loginVO); if (resultVO != null &&
+//		 * resultVO.getId() != null && !resultVO.getId().equals("")) {
+//		 * 
+//		 * //스프링 시큐리티패키지를 사용하는지 체크하는 로직
+//		 * if(EgovComponentChecker.hasComponent("egovAuthorManageService")){ // 3-1.
+//		 * spring security 연동 return "redirect:/j_spring_security_check?j_username=" +
+//		 * resultVO.getUserSe() + resultVO.getId() + "&j_password=" +
+//		 * resultVO.getUniqId();
+//		 * 
+//		 * }else{ // 3-2. 로그인 정보를 세션에 저장 request.getSession().setAttribute(LOGIN_VO,
+//		 * resultVO); return "redirect:/uat/uia/actionMain.do"; }
+//		 * 
+//		 * 
+//		 * } else { model.addAttribute("message",
+//		 * egovMessageSource.getMessage(FAIL_COMMON_LOGIN)); return EGOV_LOGIN_USR; } }
+//		 * else { model.addAttribute("message",
+//		 * egovMessageSource.getMessage(FAIL_COMMON_LOGIN)); return EGOV_LOGIN_USR; }
+//		 */
 		return EGOV_LOGIN_USR;
 	}
 
@@ -313,17 +313,17 @@ public class EgovLoginController {
 		// 221116 김혜준 2022 시큐어코딩 조치
 		LOGGER.debug("User Id : {}", EgovStringUtil.isNullToString(user.getId()));
 
-		/*
-		 * // 2. 메뉴조회 MenuManageVO menuManageVO = new MenuManageVO();
-		 * menuManageVO.setTmp_Id(user.getId());
-		 * menuManageVO.setTmp_UserSe(user.getUserSe());
-		 * menuManageVO.setTmp_Name(user.getName());
-		 * menuManageVO.setTmp_Email(user.getEmail());
-		 * menuManageVO.setTmp_OrgnztId(user.getOrgnztId());
-		 * menuManageVO.setTmp_UniqId(user.getUniqId()); List list_headmenu =
-		 * menuManageService.selectMainMenuHead(menuManageVO);
-		 * model.addAttribute("list_headmenu", list_headmenu);
-		 */
+//		/*
+//		 * // 2. 메뉴조회 MenuManageVO menuManageVO = new MenuManageVO();
+//		 * menuManageVO.setTmp_Id(user.getId());
+//		 * menuManageVO.setTmp_UserSe(user.getUserSe());
+//		 * menuManageVO.setTmp_Name(user.getName());
+//		 * menuManageVO.setTmp_Email(user.getEmail());
+//		 * menuManageVO.setTmp_OrgnztId(user.getOrgnztId());
+//		 * menuManageVO.setTmp_UniqId(user.getUniqId()); List list_headmenu =
+//		 * menuManageService.selectMainMenuHead(menuManageVO);
+//		 * model.addAttribute("list_headmenu", list_headmenu);
+//		 */
 
 		// 3. 메인 페이지 이동
 		String main_page = Globals.MAIN_PAGE;
@@ -337,17 +337,17 @@ public class EgovLoginController {
 			return main_page;
 		}
 
-		/*
-		 * if (main_page != null && !main_page.equals("")) {
-		 * 
-		 * // 3-1. 설정된 메인화면이 있는 경우 return main_page;
-		 * 
-		 * } else {
-		 * 
-		 * // 3-2. 설정된 메인화면이 없는 경우 if (user.getUserSe().equals("USR")) { return
-		 * "egovframework/com/EgovMainView"; } else { return
-		 * "egovframework/com/EgovMainViewG"; } }
-		 */
+//		/*
+//		 * if (main_page != null && !main_page.equals("")) {
+//		 * 
+//		 * // 3-1. 설정된 메인화면이 있는 경우 return main_page;
+//		 * 
+//		 * } else {
+//		 * 
+//		 * // 3-2. 설정된 메인화면이 없는 경우 if (user.getUserSe().equals("USR")) { return
+//		 * "egovframework/com/EgovMainView"; } else { return
+//		 * "egovframework/com/EgovMainViewG"; } }
+//		 */
 	}
 
 	/**
@@ -476,15 +476,15 @@ public class EgovLoginController {
 	@RequestMapping(value = "/uat/uia/getEncodingData.do")
 	public void getEncodingData() {
 
-		/*
-		 * X509Certificate x509Cert = null; byte[] cert = null; String base64cert =
-		 * null; try { x509Cert = Disk.readCert(
-		 * "/product/jeus/egovProps/gpkisecureweb/certs/SVR1311000011_env.cer"); cert =
-		 * x509Cert.getCert(); Base64 base64 = new Base64(); base64cert =
-		 * base64.encode(cert); log.info("+++ Base64로 변환된 인증서는 : " + base64cert);
-		 * 
-		 * } catch (GpkiApiException e) { e.printStackTrace(); }
-		 */
+//		/*
+//		 * X509Certificate x509Cert = null; byte[] cert = null; String base64cert =
+//		 * null; try { x509Cert = Disk.readCert(
+//		 * "/product/jeus/egovProps/gpkisecureweb/certs/SVR1311000011_env.cer"); cert =
+//		 * x509Cert.getCert(); Base64 base64 = new Base64(); base64cert =
+//		 * base64.encode(cert); log.info("+++ Base64로 변환된 인증서는 : " + base64cert);
+//		 * 
+//		 * } catch (GpkiApiException e) { e.printStackTrace(); }
+//		 */
 	}
 
 	/**
@@ -503,24 +503,24 @@ public class EgovLoginController {
 
 		// String virusReturn = null;
 
-		/*
-		 * // 브라우저 이름을 받기위한 처리 String webKind = EgovClntInfo.getClntWebKind(request);
-		 * String[] ss = webKind.split(" "); String browser = ss[1];
-		 * model.addAttribute("browser",browser); // -- 여기까지 if
-		 * (os.equalsIgnoreCase("x86")) { //Local Host TEST 진행중 } else { if
-		 * (browser.equalsIgnoreCase("Explorer")) { GPKIHttpServletResponse gpkiresponse
-		 * = null; GPKIHttpServletRequest gpkirequest = null;
-		 * 
-		 * try { gpkiresponse = new GPKIHttpServletResponse(response); gpkirequest = new
-		 * GPKIHttpServletRequest(request);
-		 * 
-		 * gpkiresponse.setRequest(gpkirequest); model.addAttribute("challenge",
-		 * gpkiresponse.getChallenge());
-		 * 
-		 * return "egovframework/com/uat/uia/EgovGpkiRegist";
-		 * 
-		 * } catch (Exception e) { return "egovframework/com/cmm/egovError"; } } }
-		 */
+//		/*
+//		 * // 브라우저 이름을 받기위한 처리 String webKind = EgovClntInfo.getClntWebKind(request);
+//		 * String[] ss = webKind.split(" "); String browser = ss[1];
+//		 * model.addAttribute("browser",browser); // -- 여기까지 if
+//		 * (os.equalsIgnoreCase("x86")) { //Local Host TEST 진행중 } else { if
+//		 * (browser.equalsIgnoreCase("Explorer")) { GPKIHttpServletResponse gpkiresponse
+//		 * = null; GPKIHttpServletRequest gpkirequest = null;
+//		 * 
+//		 * try { gpkiresponse = new GPKIHttpServletResponse(response); gpkirequest = new
+//		 * GPKIHttpServletRequest(request);
+//		 * 
+//		 * gpkiresponse.setRequest(gpkirequest); model.addAttribute("challenge",
+//		 * gpkiresponse.getChallenge());
+//		 * 
+//		 * return "egovframework/com/uat/uia/EgovGpkiRegist";
+//		 * 
+//		 * } catch (Exception e) { return "egovframework/com/cmm/egovError"; } } }
+//		 */
 		return "egovframework/com/uat/uia/EgovGpkiRegist";
 	}
 
@@ -545,25 +545,25 @@ public class EgovLoginController {
 		// 브라우저 이름을 받기위한 처리
 		String browser = EgovClntInfo.getClntWebKind(request);
 		model.addAttribute("browser", browser);
-		/*
-		 * // -- 여기까지 if (os.equalsIgnoreCase("x86")) { // Local Host TEST 진행중 } else {
-		 * if (browser.equalsIgnoreCase("Explorer")) { GPKIHttpServletResponse
-		 * gpkiresponse = null; GPKIHttpServletRequest gpkirequest = null; try {
-		 * gpkiresponse = new GPKIHttpServletResponse(response); gpkirequest = new
-		 * GPKIHttpServletRequest(request); gpkiresponse.setRequest(gpkirequest);
-		 * X509Certificate cert = null;
-		 * 
-		 * // byte[] signData = null; // byte[] privatekey_random = null; // String
-		 * signType = ""; // String queryString = "";
-		 * 
-		 * cert = gpkirequest.getSignerCert(); dn = cert.getSubjectDN();
-		 * 
-		 * model.addAttribute("dn", dn); model.addAttribute("challenge",
-		 * gpkiresponse.getChallenge());
-		 * 
-		 * return "egovframework/com/uat/uia/EgovGpkiRegist"; } catch (Exception e) {
-		 * return "egovframework/com/cmm/egovError"; } } }
-		 */
+//		/*
+//		 * // -- 여기까지 if (os.equalsIgnoreCase("x86")) { // Local Host TEST 진행중 } else {
+//		 * if (browser.equalsIgnoreCase("Explorer")) { GPKIHttpServletResponse
+//		 * gpkiresponse = null; GPKIHttpServletRequest gpkirequest = null; try {
+//		 * gpkiresponse = new GPKIHttpServletResponse(response); gpkirequest = new
+//		 * GPKIHttpServletRequest(request); gpkiresponse.setRequest(gpkirequest);
+//		 * X509Certificate cert = null;
+//		 * 
+//		 * // byte[] signData = null; // byte[] privatekey_random = null; // String
+//		 * signType = ""; // String queryString = "";
+//		 * 
+//		 * cert = gpkirequest.getSignerCert(); dn = cert.getSubjectDN();
+//		 * 
+//		 * model.addAttribute("dn", dn); model.addAttribute("challenge",
+//		 * gpkiresponse.getChallenge());
+//		 * 
+//		 * return "egovframework/com/uat/uia/EgovGpkiRegist"; } catch (Exception e) {
+//		 * return "egovframework/com/cmm/egovError"; } } }
+//		 */
 		return "egovframework/com/uat/uia/EgovGpkiRegist";
 	}
 

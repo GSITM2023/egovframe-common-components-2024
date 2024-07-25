@@ -46,25 +46,25 @@ public class ActionLoginLoginDAOTest extends EgovTestAbstractDAO {
 	@Test
 	public void actionLogin() throws Exception {
 		// given
-		final LoginVO vo = new LoginVO();
-		vo.setUserSe("USR");
-		vo.setId("TEST1");
-		vo.setPassword(EgovFileScrty.encryptPassword("rhdxhd12", vo.getId()));
+		final LoginVO loginVO = new LoginVO();
+		loginVO.setUserSe("USR");
+		loginVO.setId("TEST1");
+		loginVO.setPassword(EgovFileScrty.encryptPassword("rhdxhd12", loginVO.getId()));
 
 		// when
-		final LoginVO result = loginDAO.actionLogin(vo);
+		final LoginVO result = loginDAO.actionLogin(loginVO);
 
 		if (log.isDebugEnabled()) {
 			log.debug("result={}", result);
-			log.debug("getUserSe={}, {}", vo.getUserSe(), result.getUserSe());
-			log.debug("getId={}, {}", vo.getId(), result.getId());
-			log.debug("getPassword={}, {}", vo.getPassword(), result.getPassword());
+			log.debug("getUserSe={}, {}", loginVO.getUserSe(), result.getUserSe());
+			log.debug("getId={}, {}", loginVO.getId(), result.getId());
+			log.debug("getPassword={}, {}", loginVO.getPassword(), result.getPassword());
 		}
 
 		// then
-		assertEquals(egovMessageSource.getMessage(FAIL_COMMON_SELECT), vo.getUserSe(), result.getUserSe());
-		assertEquals(egovMessageSource.getMessage(FAIL_COMMON_SELECT), vo.getId(), result.getId());
-		assertEquals(egovMessageSource.getMessage(FAIL_COMMON_SELECT), vo.getPassword(), result.getPassword());
+		assertEquals(egovMessageSource.getMessage(FAIL_COMMON_SELECT), loginVO.getUserSe(), result.getUserSe());
+		assertEquals(egovMessageSource.getMessage(FAIL_COMMON_SELECT), loginVO.getId(), result.getId());
+		assertEquals(egovMessageSource.getMessage(FAIL_COMMON_SELECT), loginVO.getPassword(), result.getPassword());
 	}
 
 }

@@ -34,6 +34,10 @@ public class TestLoginUsrViewEgovLoginControllerSelenium {
 		// 아이디 입력
 		WebElement id = driver.findElement(By.id("id"));
 		id.sendKeys("TEST1");
+
+		// 비밀번호 입력
+		WebElement password = driver.findElement(By.id("password"));
+		password.sendKeys("rhdxhd12");
 	}
 
 }

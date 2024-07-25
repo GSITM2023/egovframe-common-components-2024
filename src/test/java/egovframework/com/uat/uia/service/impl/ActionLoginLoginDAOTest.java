@@ -44,6 +44,7 @@ public class ActionLoginLoginDAOTest extends EgovTestAbstractDAO {
 	public void actionLogin() throws Exception {
 		// given
 		LoginVO vo = new LoginVO();
+		vo.setUserSe("USR");
 
 		// when
 		LoginVO result = loginDAO.actionLogin(vo);

@@ -32,6 +32,7 @@ import egovframework.com.uat.uap.service.LoginPolicyVO;
  *  ----------   --------   ---------------------------
  *  2009.08.03   이문준            최초 생성
  *  2021.02.18   신용호            selectLoginPolicyResult() 삭제
+ *   2024.07.26  이백행          시큐어코딩 Exception 제거
  *          </pre>
  */
 @Service("egovLoginPolicyService")

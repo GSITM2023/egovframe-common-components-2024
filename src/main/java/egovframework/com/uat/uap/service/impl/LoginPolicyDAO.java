@@ -29,6 +29,7 @@ import egovframework.com.uat.uap.service.LoginPolicyVO;
  *  ----------   --------   ---------------------------
  *  2009.08.03   이문준            최초 생성
  *  2021.02.18   신용호            selectLoginPolicyResult() 삭제
+ *   2024.07.26  이백행          시큐어코딩 Exception 제거
  *          </pre>
  */
 @Repository("loginPolicyDAO")
@@ -40,7 +41,7 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return List - 로그인정책 목록
 	 */
-	public List<LoginPolicyVO> selectLoginPolicyList(LoginPolicyVO loginPolicyVO) throws Exception {
+	public List<LoginPolicyVO> selectLoginPolicyList(LoginPolicyVO loginPolicyVO) {
 		return selectList("loginPolicyDAO.selectLoginPolicyList", loginPolicyVO);
 	}
 
@@ -50,7 +51,7 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return int
 	 */
-	public int selectLoginPolicyListTotCnt(LoginPolicyVO loginPolicyVO) throws Exception {
+	public int selectLoginPolicyListTotCnt(LoginPolicyVO loginPolicyVO) {
 		return (Integer) selectOne("loginPolicyDAO.selectLoginPolicyListTotCnt", loginPolicyVO);
 	}
 
@@ -60,7 +61,7 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return LoginPolicyVO - 로그인정책 VO
 	 */
-	public LoginPolicyVO selectLoginPolicy(LoginPolicyVO loginPolicyVO) throws Exception {
+	public LoginPolicyVO selectLoginPolicy(LoginPolicyVO loginPolicyVO) {
 		return (LoginPolicyVO) selectOne("loginPolicyDAO.selectLoginPolicy", loginPolicyVO);
 	}
 
@@ -69,7 +70,7 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void insertLoginPolicy(LoginPolicy loginPolicy) throws Exception {
+	public void insertLoginPolicy(LoginPolicy loginPolicy) {
 		insert("loginPolicyDAO.insertLoginPolicy", loginPolicy);
 	}
 
@@ -78,7 +79,7 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void updateLoginPolicy(LoginPolicy loginPolicy) throws Exception {
+	public void updateLoginPolicy(LoginPolicy loginPolicy) {
 		update("loginPolicyDAO.updateLoginPolicy", loginPolicy);
 	}
 
@@ -87,7 +88,7 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void deleteLoginPolicy(LoginPolicy loginPolicy) throws Exception {
+	public void deleteLoginPolicy(LoginPolicy loginPolicy) {
 		delete("loginPolicyDAO.deleteLoginPolicy", loginPolicy);
 	}
 

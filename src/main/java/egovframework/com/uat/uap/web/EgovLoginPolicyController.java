@@ -56,6 +56,21 @@ public class EgovLoginPolicyController {
 	private DefaultBeanValidator beanValidator;
 
 	/**
+	 * 로그인 정책
+	 */
+	private static final String LOGIN_POLICY = "loginPolicy";
+
+	/**
+	 * 로그인 정책 VO
+	 */
+	private static final String LOGIN_POLICY_VO = "loginPolicyVO";
+
+	/**
+	 * 메시지
+	 */
+	private static final String MESSAGE = "message";
+
+	/**
 	 * 로그인정책 목록 조회화면으로 이동한다.
 	 * 
 	 * @return String - 리턴 Url
@@ -73,7 +88,7 @@ public class EgovLoginPolicyController {
 	 */
 	@IncludedInfo(name = "로그인정책관리", order = 30, gid = 10)
 	@RequestMapping("/uat/uap/selectLoginPolicyList.do")
-	public String selectLoginPolicyList(@ModelAttribute("loginPolicyVO") LoginPolicyVO loginPolicyVO, ModelMap model) {
+	public String selectLoginPolicyList(@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, ModelMap model) {
 
 		/** paging */
 		PaginationInfo paginationInfo = new PaginationInfo();
@@ -91,7 +106,7 @@ public class EgovLoginPolicyController {
 		int totCnt = egovLoginPolicyService.selectLoginPolicyListTotCnt(loginPolicyVO);
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
-		model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
+		model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.select"));
 
 		return "egovframework/com/uat/uap/EgovLoginPolicyList";
 	}
@@ -104,14 +119,14 @@ public class EgovLoginPolicyController {
 	 */
 	@RequestMapping("/uat/uap/getLoginPolicy.do")
 	public String selectLoginPolicy(@RequestParam("emplyrId") String emplyrId,
-			@ModelAttribute("loginPolicyVO") LoginPolicyVO loginPolicyVO, ModelMap model) {
+			@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, ModelMap model) {
 
 		loginPolicyVO.setEmplyrId(emplyrId);
 
-		model.addAttribute("loginPolicy", egovLoginPolicyService.selectLoginPolicy(loginPolicyVO));
-		model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
+		model.addAttribute(LOGIN_POLICY, egovLoginPolicyService.selectLoginPolicy(loginPolicyVO));
+		model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.select"));
 
-		LoginPolicyVO vo = (LoginPolicyVO) model.get("loginPolicy");
+		LoginPolicyVO vo = (LoginPolicyVO) model.get(LOGIN_POLICY);
 
 		if (vo.getRegYn().equals("N"))
 			return "egovframework/com/uat/uap/EgovLoginPolicyRegist";
@@ -127,12 +142,12 @@ public class EgovLoginPolicyController {
 	 */
 	@RequestMapping("/uat/uap/addLoginPolicyView.do")
 	public String insertLoginPolicyView(@RequestParam("emplyrId") String emplyrId,
-			@ModelAttribute("loginPolicyVO") LoginPolicyVO loginPolicyVO, ModelMap model) {
+			@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, ModelMap model) {
 
 		loginPolicyVO.setEmplyrId(emplyrId);
 
-		model.addAttribute("loginPolicy", egovLoginPolicyService.selectLoginPolicy(loginPolicyVO));
-		model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
+		model.addAttribute(LOGIN_POLICY, egovLoginPolicyService.selectLoginPolicy(loginPolicyVO));
+		model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.select"));
 
 		return "egovframework/com/uat/uap/EgovLoginPolicyRegist";
 	}
@@ -144,13 +159,13 @@ public class EgovLoginPolicyController {
 	 * @return String - 리턴 Url
 	 */
 	@RequestMapping("/uat/uap/addLoginPolicy.do")
-	public String insertLoginPolicy(@ModelAttribute("loginPolicy") LoginPolicy loginPolicy, BindingResult bindingResult,
+	public String insertLoginPolicy(@ModelAttribute(LOGIN_POLICY) LoginPolicy loginPolicy, BindingResult bindingResult,
 			ModelMap model) {
 
 		beanValidator.validate(loginPolicy, bindingResult); // validation 수행
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("loginPolicyVO", loginPolicy);
+			model.addAttribute(LOGIN_POLICY_VO, loginPolicy);
 			return "egovframework/com/uat/uap/EgovLoginPolicyRegist";
 		} else {
 
@@ -158,7 +173,7 @@ public class EgovLoginPolicyController {
 			loginPolicy.setUserId(user == null ? "" : EgovStringUtil.isNullToString(user.getId()));
 
 			egovLoginPolicyService.insertLoginPolicy(loginPolicy);
-			model.addAttribute("message", egovMessageSource.getMessage("success.common.update"));
+			model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.update"));
 
 			return "forward:/uat/uap/getLoginPolicy.do";
 		}
@@ -171,20 +186,20 @@ public class EgovLoginPolicyController {
 	 * @return String - 리턴 Url
 	 */
 	@RequestMapping("/uat/uap/updtLoginPolicy.do")
-	public String updateLoginPolicy(@ModelAttribute("loginPolicy") LoginPolicy loginPolicy, BindingResult bindingResult,
+	public String updateLoginPolicy(@ModelAttribute(LOGIN_POLICY) LoginPolicy loginPolicy, BindingResult bindingResult,
 			ModelMap model) {
 
 		beanValidator.validate(loginPolicy, bindingResult); // validation 수행
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("loginPolicyVO", loginPolicy);
+			model.addAttribute(LOGIN_POLICY_VO, loginPolicy);
 			return "egovframework/com/uat/uap/EgovLoginPolicyUpdt";
 		} else {
 			LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 			loginPolicy.setUserId(user == null ? "" : EgovStringUtil.isNullToString(user.getId()));
 
 			egovLoginPolicyService.updateLoginPolicy(loginPolicy);
-			model.addAttribute("message", egovMessageSource.getMessage("success.common.update"));
+			model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.update"));
 
 			return "forward:/uat/uap/selectLoginPolicyList.do";
 		}
@@ -197,11 +212,11 @@ public class EgovLoginPolicyController {
 	 * @return String - 리턴 Url
 	 */
 	@RequestMapping("/uat/uap/removeLoginPolicy.do")
-	public String deleteLoginPolicy(@ModelAttribute("loginPolicy") LoginPolicy loginPolicy, ModelMap model) {
+	public String deleteLoginPolicy(@ModelAttribute(LOGIN_POLICY) LoginPolicy loginPolicy, ModelMap model) {
 
 		egovLoginPolicyService.deleteLoginPolicy(loginPolicy);
 
-		model.addAttribute("message", egovMessageSource.getMessage("success.common.delete"));
+		model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.delete"));
 		return "forward:/uat/uap/selectLoginPolicyList.do";
 	}
 

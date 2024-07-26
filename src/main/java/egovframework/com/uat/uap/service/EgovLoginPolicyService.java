@@ -23,6 +23,7 @@ import java.util.List;
  *  ----------   --------   ---------------------------
  *  2009.08.03   이문준            최초 생성
  *  2021.02.18   신용호            selectLoginPolicyResult() 삭제
+ *   2024.07.26  이백행          시큐어코딩 Exception 제거
  *          </pre>
  */
 public interface EgovLoginPolicyService {
@@ -33,7 +34,7 @@ public interface EgovLoginPolicyService {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return List - 로그인정책 목록
 	 */
-	public List<LoginPolicyVO> selectLoginPolicyList(LoginPolicyVO loginPolicyVO) throws Exception;
+	public List<LoginPolicyVO> selectLoginPolicyList(LoginPolicyVO loginPolicyVO);
 
 	/**
 	 * 로그인정책 목록 수를 조회한다.
@@ -41,7 +42,7 @@ public interface EgovLoginPolicyService {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return int
 	 */
-	public int selectLoginPolicyListTotCnt(LoginPolicyVO loginPolicyVO) throws Exception;
+	public int selectLoginPolicyListTotCnt(LoginPolicyVO loginPolicyVO);
 
 	/**
 	 * 로그인정책 목록의 상세정보를 조회한다.
@@ -49,28 +50,28 @@ public interface EgovLoginPolicyService {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return LoginPolicyVO - 로그인정책 VO
 	 */
-	public LoginPolicyVO selectLoginPolicy(LoginPolicyVO loginPolicyVO) throws Exception;
+	public LoginPolicyVO selectLoginPolicy(LoginPolicyVO loginPolicyVO);
 
 	/**
 	 * 로그인정책 정보를 신규로 등록한다.
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void insertLoginPolicy(LoginPolicy loginPolicy) throws Exception;
+	public void insertLoginPolicy(LoginPolicy loginPolicy);
 
 	/**
 	 * 기 등록된 로그인정책 정보를 수정한다.
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void updateLoginPolicy(LoginPolicy loginPolicy) throws Exception;
+	public void updateLoginPolicy(LoginPolicy loginPolicy);
 
 	/**
 	 * 기 등록된 로그인정책 정보를 삭제한다.
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void deleteLoginPolicy(LoginPolicy loginPolicy) throws Exception;
+	public void deleteLoginPolicy(LoginPolicy loginPolicy);
 
 	/**
 	 * 로그인정책에 대한 현재 반영되어 있는 결과를 조회한다.
@@ -79,7 +80,6 @@ public interface EgovLoginPolicyService {
 	 * @return LoginPolicyVO - 로그인정책 VO
 	 */
 	/*
-	 * public LoginPolicyVO selectLoginPolicyResult(LoginPolicyVO loginPolicyVO)
-	 * throws Exception;
+	 * public LoginPolicyVO selectLoginPolicyResult(LoginPolicyVO loginPolicyVO) ;
 	 */
 }

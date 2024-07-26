@@ -46,12 +46,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EgovLoginPolicyController {
 
+	/**
+	 * Egov 메시지 소스
+	 */
 	@Resource(name = "egovMessageSource")
 	private EgovMessageSource egovMessageSource;
 
+	/**
+	 * 로그인정책 Service
+	 */
 	@Resource(name = "egovLoginPolicyService")
 	private EgovLoginPolicyService egovLoginPolicyService;
 
+	/**
+	 * 기본 Bean 유효성 검사기
+	 */
 	@Autowired
 	private DefaultBeanValidator beanValidator;
 

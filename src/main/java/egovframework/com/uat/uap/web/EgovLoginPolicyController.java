@@ -20,6 +20,7 @@ import egovframework.com.uat.uap.service.EgovLoginPolicyService;
 import egovframework.com.uat.uap.service.LoginPolicy;
 import egovframework.com.uat.uap.service.LoginPolicyVO;
 import egovframework.com.utl.fcc.service.EgovStringUtil;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 개요 - 로그인정책에 대한 controller 클래스를 정의한다.
@@ -42,6 +43,7 @@ import egovframework.com.utl.fcc.service.EgovStringUtil;
  *          </pre>
  */
 @Controller
+@RequiredArgsConstructor
 public class EgovLoginPolicyController {
 
 	@Resource(name = "egovMessageSource")

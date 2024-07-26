@@ -137,10 +137,11 @@ public class EgovLoginPolicyController {
 
 		LoginPolicyVO vo = (LoginPolicyVO) model.get(LOGIN_POLICY);
 
-		if (vo.getRegYn().equals("N"))
+		if (vo.getRegYn().equals("N")) {
 			return "egovframework/com/uat/uap/EgovLoginPolicyRegist";
-		else
+		} else {
 			return "egovframework/com/uat/uap/EgovLoginPolicyUpdt";
+		}
 	}
 
 	/**

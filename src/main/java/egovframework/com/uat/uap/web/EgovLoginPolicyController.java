@@ -47,10 +47,10 @@ import lombok.RequiredArgsConstructor;
 public class EgovLoginPolicyController {
 
 	@Resource(name = "egovMessageSource")
-	EgovMessageSource egovMessageSource;
+	private EgovMessageSource egovMessageSource;
 
 	@Resource(name = "egovLoginPolicyService")
-	EgovLoginPolicyService egovLoginPolicyService;
+	private EgovLoginPolicyService egovLoginPolicyService;
 
 	@Autowired
 	private DefaultBeanValidator beanValidator;

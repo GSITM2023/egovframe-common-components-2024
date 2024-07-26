@@ -136,7 +136,7 @@ public class EgovLoginPolicyController {
 		model.addAttribute(LOGIN_POLICY, egovLoginPolicyService.selectLoginPolicy(loginPolicyVO));
 		model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.select"));
 
-		final LoginPolicyVO result = (LoginPolicyVO) model.get(LOGIN_POLICY);
+		final LoginPolicyVO result = (LoginPolicyVO) model.getAttribute(LOGIN_POLICY);
 
 		if ("N".equals(result.getRegYn())) {
 			return "egovframework/com/uat/uap/EgovLoginPolicyRegist";

@@ -100,7 +100,7 @@ public class EgovLoginPolicyController {
 	public String selectLoginPolicyList(@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, ModelMap model) {
 
 		/** paging */
-		PaginationInfo paginationInfo = new PaginationInfo();
+		final PaginationInfo paginationInfo = new PaginationInfo();
 		paginationInfo.setCurrentPageNo(loginPolicyVO.getPageIndex());
 		paginationInfo.setRecordCountPerPage(loginPolicyVO.getPageUnit());
 		paginationInfo.setPageSize(loginPolicyVO.getPageSize());
@@ -112,7 +112,7 @@ public class EgovLoginPolicyController {
 		loginPolicyVO.setLoginPolicyList(egovLoginPolicyService.selectLoginPolicyList(loginPolicyVO));
 		model.addAttribute("loginPolicyList", loginPolicyVO.getLoginPolicyList());
 
-		int totCnt = egovLoginPolicyService.selectLoginPolicyListTotCnt(loginPolicyVO);
+		final int totCnt = egovLoginPolicyService.selectLoginPolicyListTotCnt(loginPolicyVO);
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
 		model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.select"));
@@ -135,7 +135,7 @@ public class EgovLoginPolicyController {
 		model.addAttribute(LOGIN_POLICY, egovLoginPolicyService.selectLoginPolicy(loginPolicyVO));
 		model.addAttribute(MESSAGE, egovMessageSource.getMessage("success.common.select"));
 
-		LoginPolicyVO vo = (LoginPolicyVO) model.get(LOGIN_POLICY);
+		final LoginPolicyVO vo = (LoginPolicyVO) model.get(LOGIN_POLICY);
 
 		if ("N".equals(vo.getRegYn())) {
 			return "egovframework/com/uat/uap/EgovLoginPolicyRegist";
@@ -179,7 +179,7 @@ public class EgovLoginPolicyController {
 			return "egovframework/com/uat/uap/EgovLoginPolicyRegist";
 		} else {
 
-			LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+			final LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 			loginPolicy.setUserId(user == null ? "" : EgovStringUtil.isNullToString(user.getId()));
 
 			egovLoginPolicyService.insertLoginPolicy(loginPolicy);
@@ -205,7 +205,7 @@ public class EgovLoginPolicyController {
 			model.addAttribute(LOGIN_POLICY_VO, loginPolicy);
 			return "egovframework/com/uat/uap/EgovLoginPolicyUpdt";
 		} else {
-			LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+			final LoginVO user = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 			loginPolicy.setUserId(user == null ? "" : EgovStringUtil.isNullToString(user.getId()));
 
 			egovLoginPolicyService.updateLoginPolicy(loginPolicy);

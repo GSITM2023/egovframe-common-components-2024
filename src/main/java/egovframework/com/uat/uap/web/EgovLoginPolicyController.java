@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,7 +97,7 @@ public class EgovLoginPolicyController {
 	 */
 	@IncludedInfo(name = "로그인정책관리", order = 30, gid = 10)
 	@RequestMapping("/uat/uap/selectLoginPolicyList.do")
-	public String selectLoginPolicyList(@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, ModelMap model) {
+	public String selectLoginPolicyList(@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, Model model) {
 
 		/** paging */
 		final PaginationInfo paginationInfo = new PaginationInfo();
@@ -128,7 +128,7 @@ public class EgovLoginPolicyController {
 	 */
 	@RequestMapping("/uat/uap/getLoginPolicy.do")
 	public String selectLoginPolicy(@RequestParam("emplyrId") String emplyrId,
-			@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, ModelMap model) {
+			@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, Model model) {
 
 		loginPolicyVO.setEmplyrId(emplyrId);
 
@@ -152,7 +152,7 @@ public class EgovLoginPolicyController {
 	 */
 	@RequestMapping("/uat/uap/addLoginPolicyView.do")
 	public String insertLoginPolicyView(@RequestParam("emplyrId") String emplyrId,
-			@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, ModelMap model) {
+			@ModelAttribute(LOGIN_POLICY_VO) LoginPolicyVO loginPolicyVO, Model model) {
 
 		loginPolicyVO.setEmplyrId(emplyrId);
 
@@ -170,7 +170,7 @@ public class EgovLoginPolicyController {
 	 */
 	@RequestMapping("/uat/uap/addLoginPolicy.do")
 	public String insertLoginPolicy(@ModelAttribute(LOGIN_POLICY) LoginPolicy loginPolicy, BindingResult bindingResult,
-			ModelMap model) {
+			Model model) {
 
 		beanValidator.validate(loginPolicy, bindingResult); // validation 수행
 
@@ -197,7 +197,7 @@ public class EgovLoginPolicyController {
 	 */
 	@RequestMapping("/uat/uap/updtLoginPolicy.do")
 	public String updateLoginPolicy(@ModelAttribute(LOGIN_POLICY) LoginPolicy loginPolicy, BindingResult bindingResult,
-			ModelMap model) {
+			Model model) {
 
 		beanValidator.validate(loginPolicy, bindingResult); // validation 수행
 
@@ -222,7 +222,7 @@ public class EgovLoginPolicyController {
 	 * @return String - 리턴 Url
 	 */
 	@RequestMapping("/uat/uap/removeLoginPolicy.do")
-	public String deleteLoginPolicy(@ModelAttribute(LOGIN_POLICY) LoginPolicy loginPolicy, ModelMap model) {
+	public String deleteLoginPolicy(@ModelAttribute(LOGIN_POLICY) LoginPolicy loginPolicy, Model model) {
 
 		egovLoginPolicyService.deleteLoginPolicy(loginPolicy);
 
